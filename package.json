@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
-    "test-coverage": "jest src/ --coverage --watchAll=false --passWothNoTests"
+    "test-coverage": "react-scripts test --coverage --watchAll=false --passWithNoTests"
   },
   "eslintConfig": {
     "extends": [
