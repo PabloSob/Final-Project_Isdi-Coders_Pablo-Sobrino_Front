@@ -50,8 +50,13 @@
   },
   "jest": {
     "collectCoverageFrom": [
+      "src/*.tsx",
+      "src/.ts",
       "!src/index.tsx",
-      "!src/reportWebVitals.ts"
+      "!src/react-app-env.d.ts",
+      "!src/reportWebVitals.ts",
+      "!src/**/.test.tsx",
+      "!src/setupTests.ts"
     ]
   }
 }
