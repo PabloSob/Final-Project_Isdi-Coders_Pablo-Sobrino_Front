@@ -12,7 +12,7 @@ const ButtonStyled = styled.div`
       background-color: ${(props) => props.theme.textThirdColor};
       font-size: 1rem;
       color: #fff;
-      border: none;00
+      border: none;
       text-align: center;
       font-weight: bold;
       padding: 1rem;
