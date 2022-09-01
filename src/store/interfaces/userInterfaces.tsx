@@ -1,7 +1,7 @@
 interface RegisterUserInterface {
   userName: string;
   password: string;
-  repeat_password: string;
+  repeatPassword: string;
 }
 
 export default RegisterUserInterface;

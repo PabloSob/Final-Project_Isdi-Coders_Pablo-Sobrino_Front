@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Register from "./Register";
 
@@ -79,6 +79,33 @@ describe("Given a Register component", () => {
       await userEvent.click(submitButton);
 
       expect(mockUser).toHaveBeenCalled();
+    });
+    describe("And the user type different passwords", () => {
+      test("Then it should call the mockUser function", async () => {
+        const fakeUserName = "pruebita";
+        const fakePassword = "pruebecita";
+        const repeatFakePassword = "pruebecita";
+
+        render(<Register />);
+
+        const form = {
+          userName: screen.getByLabelText("User name") as HTMLInputElement,
+          password: screen.getByLabelText("Password") as HTMLInputElement,
+          repeatPassword: screen.getByLabelText(
+            "Repeat Password"
+          ) as HTMLInputElement,
+        };
+
+        fireEvent.change(form.userName, { target: { value: fakeUserName } });
+        fireEvent.change(form.password, { target: { value: fakePassword } });
+        fireEvent.change(form.repeatPassword, {
+          target: { value: repeatFakePassword },
+        });
+        const submit = screen.getByRole("button", { name: "Sign up" });
+        await userEvent.click(submit);
+
+        expect(mockUser).toHaveBeenCalled();
+      });
     });
   });
 });
