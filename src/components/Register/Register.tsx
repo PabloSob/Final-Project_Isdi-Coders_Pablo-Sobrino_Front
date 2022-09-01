@@ -78,7 +78,7 @@ const Register = (): JSX.Element => {
           ></input>
         </div>
         <div className="register-form__input__container">
-          <label htmlFor="password" className="input__title">
+          <label htmlFor="password" className={`input__title ${fieldStatus}`}>
             Password
           </label>
           <input
