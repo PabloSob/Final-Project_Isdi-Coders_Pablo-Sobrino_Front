@@ -30,7 +30,7 @@ const Register = (): JSX.Element => {
       register({
         userName: formData.username,
         password: formData.password,
-        repeat_password: formData.repeatPassword,
+        repeatPassword: formData.repeatPassword,
       });
 
       setFormData(initialState);
