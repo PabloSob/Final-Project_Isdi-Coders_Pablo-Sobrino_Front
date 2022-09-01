@@ -19,7 +19,7 @@ const Register = (): JSX.Element => {
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
     if (formData.password !== formData.repeatPassword) {
-      setFieldStatus("");
+      setFieldStatus("form__input--wrong");
 
       setFormData({
         username: formData.username,

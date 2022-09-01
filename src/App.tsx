@@ -1,11 +1,14 @@
+import { Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import Register from "./components/Register/Register";
+import RegisterPage from "./pages/RegisterPage";
 import styledMainTheme from "./styleMainTheme";
 
 function App() {
   return (
     <ThemeProvider theme={styledMainTheme}>
-      <Register />
+      <Routes>
+        <Route path="/" element={<RegisterPage />} />
+      </Routes>
     </ThemeProvider>
   );
 }
