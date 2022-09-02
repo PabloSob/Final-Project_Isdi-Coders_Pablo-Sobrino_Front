@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const RegisterStyled = styled.form`
+const LoginStyled = styled.form`
   padding: 0;
   margin: 15px;
   flex-direction: column;
@@ -24,12 +24,10 @@ const RegisterStyled = styled.form`
       font-weight: bold;
     }
   }
-  & .register-form {
+  & .login-form {
     height: 100%;
     display: inline-block;
     &__form-title {
-      padding: 12px;
-      margin-top: 12px;
       font-size: 30px;
     }
     &__input {
@@ -45,6 +43,7 @@ const RegisterStyled = styled.form`
     }
     &__input__container {
       margin-top: 30px;
+      margin-bottom: 10px;
     }
     &__form-title {
       padding: 0;
@@ -54,10 +53,11 @@ const RegisterStyled = styled.form`
     &__link-login {
       color: #9e9e9e;
       a {
-        margin-left: 10px;
+        margin-left: 28px;
         text-decoration: none;
         color: #159a9c;
-        font-size: bold;
+        font-size: 22px;
+        font-weight: bold;
       }
     }
   }
@@ -72,4 +72,4 @@ const RegisterStyled = styled.form`
   }
 `;
 
-export default RegisterStyled;
+export default LoginStyled;

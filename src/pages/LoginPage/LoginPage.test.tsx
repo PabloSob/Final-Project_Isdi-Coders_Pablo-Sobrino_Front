@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import RegisterPage from "./RegisterPage";
+import LoginFormPage from "./LoginPage";
 
-describe("Given the RegiterPage page", () => {
+describe("Given the LoginPage component", () => {
   describe("When it's instantiated", () => {
-    test("Then should show 'Create an account' in heading", () => {
-      const headingText = "Create an account";
+    test("Then should show 'Login' component", () => {
+      const headingText = "Hi, welcome back!";
 
-      render(<RegisterPage />);
+      render(<LoginFormPage />);
       const expectedText = screen.getByRole("heading", { name: headingText });
 
       expect(expectedText).toBeInTheDocument();
