@@ -40,15 +40,16 @@ const ButtonStyled = styled.div`
       align-self: center;
       border-radius: 8px;
       background-color: ${(props) => props.theme.textThirdColor};
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: #fff;
-      border: none;
+      border: solid 1px #000000;
       text-align: center;
       font-weight: bold;
       padding: 1rem;
       display: flex;
       justify-content: center;
       align-self: center;
+      margin-top: 15px;
     }
   }
 `;
