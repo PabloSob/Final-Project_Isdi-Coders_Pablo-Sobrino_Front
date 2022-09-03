@@ -14,6 +14,7 @@ const RegisterStyled = styled.div`
       align-self: flex-start;
       display: flex;
       align-items: center;
+      padding-bottom: 1.5rem;
     }
     &__picture {
       height: 45px;
