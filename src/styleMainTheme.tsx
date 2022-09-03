@@ -4,7 +4,7 @@ const styledMainTheme = {
   textThirdColor: "#159A9C",
   textEnterInputColor: "#9E9E9E",
   backgroundFirstColor: "#DEEFE7",
-  backgroundShadow: "#002333",
+  backgroundShadow: "#13002333",
   loadingColor: "#159A9C",
   errorColor: "#FF0000",
   successColor: "#55B938",
