@@ -1,10 +1,18 @@
 import styled from "styled-components";
 
-const ButtonStyled = styled.div`
-  width: 100%;
-  display: grid;
-  place-items: center;
-  .button {
+const ButtonStyled = styled.button`
+  &.button-link {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    color: ${(props) => props.theme.textThirdColor};
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    background-color: #deefe7;
+  }
+  &.button {
     &--small {
       width: 5.75rem;
       height: 2.8rem;
@@ -51,6 +59,12 @@ const ButtonStyled = styled.div`
       align-self: center;
       margin-top: 15px;
     }
+  }
+  &--link {
+    color: ${(props) => props.theme.textThirdColor};
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
   }
 `;
 

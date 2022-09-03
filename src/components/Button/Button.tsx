@@ -15,15 +15,13 @@ const Button = ({
   isDisable,
 }: ButtonProps): JSX.Element => {
   return (
-    <ButtonStyled>
-      <button
-        className={classNameTypeButton}
-        type={type}
-        disabled={isDisable}
-        onClick={() => actionOnclick()}
-      >
-        {buttonText}
-      </button>
+    <ButtonStyled
+      className={classNameTypeButton}
+      type={type}
+      disabled={isDisable}
+      onClick={() => actionOnclick()}
+    >
+      {buttonText}
     </ButtonStyled>
   );
 };
