@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import LoginForm from "./components/Login/LoginForm";
-import RegisterForm from "./components/Register/RegisterForm";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import styledMainTheme from "./styleMainTheme";
 
 function App() {
@@ -9,8 +9,8 @@ function App() {
     <ThemeProvider theme={styledMainTheme}>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </ThemeProvider>
   );

@@ -1,7 +1,14 @@
-interface RegisterUserInterface {
+export interface ProtoUser {
   userName: string;
   password: string;
-  repeatPassword: string;
 }
 
-export default RegisterUserInterface;
+export interface UserToken {
+  token: string;
+}
+
+export interface User {
+  id: string;
+  userName: string;
+  token: string;
+}

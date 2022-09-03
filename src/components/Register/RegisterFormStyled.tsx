@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const RegisterStyled = styled.form`
+const RegisterStyled = styled.div`
   padding: 0;
   margin: 15px;
   flex-direction: column;
@@ -8,6 +8,7 @@ const RegisterStyled = styled.form`
   height: 100vh;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 0px;
   & .logo {
     &__container {
       align-self: flex-start;
@@ -25,9 +26,8 @@ const RegisterStyled = styled.form`
     }
   }
   & .register-form {
-    height: 100%;
-    display: inline-block;
-    &__form-title {
+    width: 100%;
+    &__title {
       padding: 12px;
       margin-top: 12px;
       font-size: 30px;
@@ -50,16 +50,6 @@ const RegisterStyled = styled.form`
       padding: 0;
       margin: 0;
       align-self: flex-start;
-    }
-    &__link-login {
-      color: #9e9e9e;
-      a {
-        margin-left: 28px;
-        text-decoration: none;
-        color: #159a9c;
-        font-size: 22px;
-        font-weight: bold;
-      }
     }
   }
   .input__title {

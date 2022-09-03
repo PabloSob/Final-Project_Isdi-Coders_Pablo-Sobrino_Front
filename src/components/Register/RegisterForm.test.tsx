@@ -1,24 +1,23 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import Wrapper from "../../utils/Wrapper";
 import RegisterForm from "./RegisterForm";
 
 const mockUser = jest.fn();
 
-jest.mock("../../store/features/users/hooks/useUserApi", () => () => ({
+jest.mock("../../hooks/useUserApi", () => () => ({
   register: mockUser,
 }));
 
 describe("Given a Register component", () => {
   describe("When its instantiaded", () => {
     test("Then it should show a unserName, a password and a repeatPassword inputs, a text with a logo, a text to create an account and a plus a SING UP button", () => {
-      render(<RegisterForm />);
+      render(<RegisterForm />, { wrapper: Wrapper });
 
       const registerForm = [
         screen.getByPlaceholderText("Enter your username"),
         screen.getByPlaceholderText("Enter your password"),
         screen.getByPlaceholderText("Repeat your password"),
-        screen.getByText("Already have an account?"),
-        screen.getByText("Login"),
         screen.getByText("Crypto Realm"),
         screen.getByText("Create an account"),
         screen.getByAltText("a crypto logo"),

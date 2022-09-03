@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
-const LoginStyled = styled.form`
+const LoginStyled = styled.div`
   padding: 0;
   margin: 15px;
   flex-direction: column;
   align-items: center;
   height: 100vh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  margin-bottom: 0px;
   & .logo {
     &__container {
       align-self: flex-start;
@@ -25,9 +26,8 @@ const LoginStyled = styled.form`
     }
   }
   & .login-form {
-    height: 100%;
-    display: inline-block;
-    &__form-title {
+    width: 100%;
+    &__title {
       font-size: 30px;
     }
     &__input {
@@ -49,16 +49,6 @@ const LoginStyled = styled.form`
       padding: 0;
       margin: 0;
       align-self: flex-start;
-    }
-    &__link-login {
-      color: #9e9e9e;
-      a {
-        margin-left: 28px;
-        text-decoration: none;
-        color: #159a9c;
-        font-size: 22px;
-        font-weight: bold;
-      }
     }
   }
   .input__title {
