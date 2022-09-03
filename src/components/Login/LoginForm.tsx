@@ -59,7 +59,7 @@ const LoginForm = (): JSX.Element => {
             ></input>
           </div>
           <div className="login-form__input__container">
-            <label htmlFor="password" className="form__label">
+            <label htmlFor="password" className="input__title">
               Password
             </label>
             <input
