@@ -4,7 +4,7 @@ import { act } from "react-dom/test-utils";
 import { toast } from "react-toastify";
 import { loadAllCryptoActionCreator } from "../../store/features/crypto/slices/cryptoSlice";
 import Wrapper from "../../utils/Wrapper";
-import useCryptoApi from "./useCryptoApi";
+import useCryptoApi from "./useCrypto";
 
 jest.mock("react-toastify");
 const mockUseDispatch = jest.fn();
@@ -23,6 +23,7 @@ describe("Given a useCryptoApi hook", () => {
       team: 4,
       value: 2,
       ICO: expect.any(Date),
+      id: "4321",
     },
     {
       title: "eflereum",
@@ -31,6 +32,7 @@ describe("Given a useCryptoApi hook", () => {
       team: 15,
       value: 3,
       ICO: expect.any(Date),
+      id: "4322",
     },
   ];
 

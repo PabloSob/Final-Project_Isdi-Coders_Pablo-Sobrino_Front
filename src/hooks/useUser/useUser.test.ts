@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import { toast } from "react-toastify";
 import { ProtoUser } from "../../store/interfaces/userInterfaces";
 import Wrapper from "../../utils/Wrapper";
-import useUserApi from "./useUserApi";
+import useUserApi from "./useUser";
 
 jest.mock("react-toastify");
 

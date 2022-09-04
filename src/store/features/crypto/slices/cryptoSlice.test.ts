@@ -14,6 +14,7 @@ describe("Given a crypto slice", () => {
           team: 2,
           value: 3,
           ICO: new Date(),
+          id: "4321",
         },
         {
           title: "Sipcoin",
@@ -22,6 +23,7 @@ describe("Given a crypto slice", () => {
           team: 3,
           value: 4,
           ICO: new Date(),
+          id: "4322",
         },
       ];
 

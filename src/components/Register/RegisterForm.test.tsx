@@ -1,6 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Wrapper from "../../utils/Wrapper";
+import { customRender } from "../../utils/customRender";
 import RegisterForm from "./RegisterForm";
 
 const mockUser = jest.fn();
@@ -11,25 +11,26 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
 }));
 
-jest.mock("../../hooks/useUserApi/useUserApi", () => () => ({
+jest.mock("../../hooks/useUser/useUser", () => () => ({
   register: mockUser,
 }));
 
-describe("Given a Register component", () => {
-  describe("When its instantiaded", () => {
-    test("Then it should display a form with an unsername, a password and a repeatPassword inputs, a text with a logo, a text to create an account and button and a link", () => {
-      render(<RegisterForm />, { wrapper: Wrapper });
+describe("Given a form component", () => {
+  describe("When its instantiated", () => {
+    test("Then it should display a form with a title, three inputs, a button and a link", () => {
+      customRender(<RegisterForm />);
 
-      const registerForm = [
+      const elementsInForm = [
         screen.getByPlaceholderText("Enter your username"),
         screen.getByPlaceholderText("Enter your password"),
         screen.getByPlaceholderText("Repeat your password"),
         screen.getByText("Crypto Realm"),
         screen.getByText("Create an account"),
         screen.getByAltText("a crypto logo"),
+        screen.getByRole("button"),
       ];
 
-      registerForm.forEach((element) => expect(element).toBeInTheDocument());
+      elementsInForm.forEach((element) => expect(element).toBeInTheDocument());
     });
   });
 
@@ -41,78 +42,146 @@ describe("Given a Register component", () => {
 
       render(<RegisterForm />);
 
-      const usernameInput = screen.getByPlaceholderText(
-        "Enter your username"
+      const usernameInput = screen.getByLabelText(
+        "Username"
       ) as HTMLInputElement;
-      const passwordInput = screen.getByPlaceholderText(
-        "Enter your password"
+      const passwordInput = screen.getByLabelText(
+        "Password"
       ) as HTMLInputElement;
-      const repeatPasswordInput = screen.getByPlaceholderText(
-        "Repeat your password"
+      const repeatPasswordInput = screen.getByLabelText(
+        "Repeat Password"
       ) as HTMLInputElement;
 
       await userEvent.type(usernameInput, fakeName);
       await userEvent.type(passwordInput, fakePassword);
       await userEvent.type(repeatPasswordInput, fakePassword2);
 
-      expect(usernameInput).toHaveValue(fakeName);
+      expect(usernameInput.value).toBe(fakeName);
       expect(passwordInput).toHaveValue(fakePassword);
-      expect(repeatPasswordInput).toHaveValue(fakePassword2);
+      expect(repeatPasswordInput.value).toBe(fakePassword2);
     });
   });
-  describe("When a user fills the inputs and click the button", () => {
+  describe("When a user fills the inputs and click the submit button", () => {
     test("Then the register function will be called", async () => {
+      mockUser.mockResolvedValue(true);
+
       const fakeName = "maria";
       const fakePassword = "maria333";
       const fakePassword2 = "maria333";
 
       render(<RegisterForm />);
 
-      const userNameInput = screen.getByPlaceholderText(
-        "Enter your username"
+      const usernameInput = screen.getByLabelText(
+        "Username"
       ) as HTMLInputElement;
-      const passwordInput = screen.getByPlaceholderText(
-        "Enter your password"
+      const passwordInput = screen.getByLabelText(
+        "Password"
       ) as HTMLInputElement;
-      const repeatPasswordInput = screen.getByPlaceholderText(
-        "Repeat your password"
+      const repeatPasswordInput = screen.getByLabelText(
+        "Repeat Password"
       ) as HTMLInputElement;
 
       const submitButton = screen.getByRole("button");
 
-      await userEvent.type(userNameInput, fakeName);
+      await userEvent.type(usernameInput, fakeName);
       await userEvent.type(passwordInput, fakePassword);
       await userEvent.type(repeatPasswordInput, fakePassword2);
 
       await userEvent.click(submitButton);
 
       expect(mockUser).toHaveBeenCalled();
+      await waitFor(() => expect(mockNavigate).toHaveBeenCalled());
     });
-    describe("And the user type different passwords", () => {
-      test("Then it should call the mockUser function", async () => {
+    describe("When the registration was ok", () => {
+      test("Then the navigate function will be called", async () => {
+        mockUser.mockResolvedValue(true);
+
         const fakeUserName = "pruebita";
         const fakePassword = "pruebecita";
         const repeatFakePassword = "pruebecita";
 
         render(<RegisterForm />);
 
-        const form = {
-          userName: screen.getByLabelText("Username") as HTMLInputElement,
-          password: screen.getByLabelText("Password") as HTMLInputElement,
-          repeatPassword: screen.getByLabelText(
-            "Repeat Password"
-          ) as HTMLInputElement,
-        };
+        const usernameInput = screen.getByLabelText(
+          "Username"
+        ) as HTMLInputElement;
+        const passwordInput = screen.getByLabelText(
+          "Password"
+        ) as HTMLInputElement;
+        const repeatPasswordInput = screen.getByLabelText(
+          "Repeat Password"
+        ) as HTMLInputElement;
 
-        fireEvent.change(form.userName, { target: { value: fakeUserName } });
-        fireEvent.change(form.password, { target: { value: fakePassword } });
-        fireEvent.change(form.repeatPassword, {
-          target: { value: repeatFakePassword },
-        });
-        const submit = screen.getByRole("button", { name: "Sign up" });
-        await userEvent.click(submit);
+        const submitButton = screen.getByRole("button");
+
+        await userEvent.type(usernameInput, fakeUserName);
+        await userEvent.type(passwordInput, fakePassword);
+        await userEvent.type(repeatPasswordInput, repeatFakePassword);
+
+        await userEvent.click(submitButton);
 
         expect(mockUser).toHaveBeenCalled();
+        await waitFor(() => expect(mockNavigate).toHaveBeenCalled());
+      });
+
+      describe("When the registration was fail", () => {
+        test("Then the register function will be called", async () => {
+          mockUser.mockResolvedValue(false);
+
+          const fakeUserName = "pruebitass";
+          const fakePassword = "pruebecita";
+          const repeatFakePassword = "pruebecita";
+
+          render(<RegisterForm />);
+
+          const usernameInput = screen.getByLabelText(
+            "Username"
+          ) as HTMLInputElement;
+          const passwordInput = screen.getByLabelText(
+            "Password"
+          ) as HTMLInputElement;
+          const repeatPasswordInput = screen.getByLabelText(
+            "Repeat Password"
+          ) as HTMLInputElement;
+
+          const submitButton = screen.getByRole("button");
+
+          await userEvent.type(usernameInput, fakeUserName);
+          await userEvent.type(passwordInput, fakePassword);
+          await userEvent.type(repeatPasswordInput, repeatFakePassword);
+
+          await userEvent.click(submitButton);
+
+          expect(mockUser).toHaveBeenCalled();
+          await waitFor(() => expect(mockNavigate).not.toHaveBeenCalled());
+        });
+      });
+      describe("And the user type different passwords", () => {
+        test("Then it shouldn't call the mockUser function", async () => {
+          const fakeUserName = "pruebita";
+          const fakePassword = "pruebecita";
+          const repeatFakePassword = "arbol";
+          render(<RegisterForm />);
+
+          const form = {
+            userName: screen.getByLabelText("Username") as HTMLInputElement,
+            password: screen.getByLabelText("Password") as HTMLInputElement,
+            repeatPassword: screen.getByLabelText(
+              "Repeat Password"
+            ) as HTMLInputElement,
+          };
+
+          fireEvent.change(form.userName, { target: { value: fakeUserName } });
+          fireEvent.change(form.password, { target: { value: fakePassword } });
+          fireEvent.change(form.repeatPassword, {
+            target: { value: repeatFakePassword },
+          });
+
+          const submit = screen.getByRole("button", { name: "Sign up" });
+          await userEvent.click(submit);
+
+          expect(mockUser).not.toHaveBeenCalled();
+        });
       });
     });
   });

@@ -5,6 +5,7 @@ export interface ICrypto {
   team: number;
   value: number;
   ICO: Date;
+  id: string;
 }
 
 export type Crypto = ICrypto[];
