@@ -17,7 +17,7 @@ jest.mock("../../hooks/useUserApi/useUserApi", () => () => ({
 
 describe("Given a Register component", () => {
   describe("When its instantiaded", () => {
-    test("Then it should show a unserName, a password and a repeatPassword inputs, a text with a logo, a text to create an account and a plus a SING UP button", () => {
+    test("Then it should display a form with an unsername, a password and a repeatPassword inputs, a text with a logo, a text to create an account and button and a link", () => {
       render(<RegisterForm />, { wrapper: Wrapper });
 
       const registerForm = [
@@ -38,6 +38,7 @@ describe("Given a Register component", () => {
       const fakeName = "maria";
       const fakePassword = "maria333";
       const fakePassword2 = "maria333";
+
       render(<RegisterForm />);
 
       const usernameInput = screen.getByPlaceholderText(
@@ -64,6 +65,7 @@ describe("Given a Register component", () => {
       const fakeName = "maria";
       const fakePassword = "maria333";
       const fakePassword2 = "maria333";
+
       render(<RegisterForm />);
 
       const userNameInput = screen.getByPlaceholderText(
@@ -81,6 +83,7 @@ describe("Given a Register component", () => {
       await userEvent.type(userNameInput, fakeName);
       await userEvent.type(passwordInput, fakePassword);
       await userEvent.type(repeatPasswordInput, fakePassword2);
+
       await userEvent.click(submitButton);
 
       expect(mockUser).toHaveBeenCalled();

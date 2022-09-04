@@ -13,7 +13,7 @@ const cryptoSlice = createSlice({
   },
 });
 
-export const { reducer: wishesReducer } = cryptoSlice;
+export const { reducer: cryptoReducer } = cryptoSlice;
 
 export const { loadAllCrypto: loadAllCryptoActionCreator } =
   cryptoSlice.actions;

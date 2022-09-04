@@ -47,4 +47,39 @@ export const handlers = [
       );
     }
   ),
+  rest.get(`${process.env.REACT_APP_API_URL}crypto`, async (req, res, ctx) => {
+    const headerTestError = req.headers.get("IsTestError");
+
+    if (headerTestError) {
+      return res(
+        ctx.status(500),
+        ctx.json({
+          error: "Something went wrong",
+        })
+      );
+    }
+    return res(
+      ctx.status(200),
+      ctx.json({
+        crypto: [
+          {
+            title: "super coin",
+            logo: "/crypto.png",
+            description: "A great crypto",
+            team: 4,
+            value: 2,
+            ICO: new Date(),
+          },
+          {
+            title: "eflereum",
+            logo: "/eflereum.png",
+            description: "The revolution",
+            team: 15,
+            value: 3,
+            ICO: new Date(),
+          },
+        ],
+      })
+    );
+  }),
 ];

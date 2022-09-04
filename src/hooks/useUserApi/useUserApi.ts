@@ -6,7 +6,7 @@ import {
   User,
   UserToken,
 } from "../../store/interfaces/userInterfaces";
-import { loginUsersActionCreator } from "../../store/users/slices/userSlice";
+import { loginUsersActionCreator } from "../../store/features/user/slices/userSlice";
 import { useAppDispatch } from "../../store/hooks";
 
 export const apiURL = process.env.REACT_APP_API_URL;

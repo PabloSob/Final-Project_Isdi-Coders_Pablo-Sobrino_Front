@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import { toast } from "react-toastify";
 import { loadAllCryptoActionCreator } from "../../store/features/crypto/slices/cryptoSlice";
 import { useAppDispatch } from "../../store/hooks";
+import { ICrypto } from "../../store/interfaces/cryptoInterfaces";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -25,12 +26,16 @@ const useCryptoApi = () => {
 
     try {
       loadingModal("Please wait");
-      const { data, status } = await axios.get(loadCryptoUrl, {
+      const { data } = await axios.get(loadCryptoUrl, {
         headers: { authorization: `Bearer ${token}` },
       });
-      if (status === 200) {
-        dispatch(loadAllCryptoActionCreator(data));
-      }
+
+      const cryptoList = data.crypto.map((crypto: ICrypto) => ({
+        ...crypto,
+        ICO: new Date(crypto.ICO),
+      }));
+
+      dispatch(loadAllCryptoActionCreator(cryptoList));
     } catch (error) {
       errorModal("Something went wrong");
     }
