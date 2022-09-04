@@ -4,8 +4,14 @@ import Wrapper from "../../utils/Wrapper";
 import RegisterForm from "./RegisterForm";
 
 const mockUser = jest.fn();
+const mockNavigate = jest.fn();
 
-jest.mock("../../hooks/useUserApi", () => () => ({
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockNavigate,
+}));
+
+jest.mock("../../hooks/useUserApi/useUserApi", () => () => ({
   register: mockUser,
 }));
 
