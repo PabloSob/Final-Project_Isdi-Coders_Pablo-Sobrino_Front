@@ -1,15 +1,15 @@
 import { renderHook } from "@testing-library/react";
 import { toast } from "react-toastify";
-import { ProtoUser } from "../store/interfaces/userInterfaces";
-import Wrapper from "../utils/Wrapper";
+import { ProtoUser } from "../../store/interfaces/userInterfaces";
+import Wrapper from "../../utils/Wrapper";
 import useUserApi from "./useUserApi";
 
 jest.mock("react-toastify");
 
 const mockUseDispatch = jest.fn();
 
-jest.mock("../store/hooks", () => ({
-  ...jest.requireActual("../store/hooks"),
+jest.mock("../../store/hooks", () => ({
+  ...jest.requireActual("../../store/hooks"),
   useAppDispatch: () => mockUseDispatch,
 }));
 

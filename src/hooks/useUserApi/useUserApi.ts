@@ -1,9 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
-import { ProtoUser, User, UserToken } from "../store/interfaces/userInterfaces";
-import { loginUsersActionCreator } from "../store/users/slices/userSlice";
-import { useAppDispatch } from "../store/hooks";
+import {
+  ProtoUser,
+  User,
+  UserToken,
+} from "../../store/interfaces/userInterfaces";
+import { loginUsersActionCreator } from "../../store/users/slices/userSlice";
+import { useAppDispatch } from "../../store/hooks";
 
 export const apiURL = process.env.REACT_APP_API_URL;
 
@@ -22,13 +26,12 @@ const useUserApi = () => {
 
   const register = async (registerUserData: ProtoUser) => {
     try {
-      debugger;
       await axios.post(`${apiURL}users/register`, {
         userName: registerUserData.userName,
         password: registerUserData.password,
       });
-      debugger;
       successModal("You have been registered!");
+      return true;
     } catch (error) {
       errorModal("Something went wrong");
     }

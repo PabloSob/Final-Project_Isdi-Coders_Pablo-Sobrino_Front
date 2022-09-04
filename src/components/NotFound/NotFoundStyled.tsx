@@ -48,6 +48,7 @@ const NotFoundStyled = styled.div`
       color: ${(props) => props.theme.textThirdColor};
       align-self: center;
       font-weight: bold;
+      font-size: 1.5rem;
     }
   }
 `;

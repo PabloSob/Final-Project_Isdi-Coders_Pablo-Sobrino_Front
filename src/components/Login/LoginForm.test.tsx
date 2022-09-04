@@ -4,7 +4,7 @@ import Wrapper from "../../utils/Wrapper";
 import LoginForm from "./LoginForm";
 
 let mockLogin = { login: jest.fn() };
-jest.mock("../../hooks/useUserApi", () => () => mockLogin);
+jest.mock("../../hooks/useUserApi/useUserApi", () => () => mockLogin);
 
 describe("Given a Login Component", () => {
   describe("When instantiated", () => {

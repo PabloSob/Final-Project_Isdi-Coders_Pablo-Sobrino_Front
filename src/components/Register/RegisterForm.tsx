@@ -1,9 +1,10 @@
 import RegisterStyled from "./RegisterFormStyled";
 import Button from "../Button/Button";
 import { SyntheticEvent, useState } from "react";
-import useUserApi from "../../hooks/useUserApi";
+import useUserApi from "../../hooks/useUserApi/useUserApi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = (): JSX.Element => {
   const initialState = {
@@ -13,12 +14,14 @@ const RegisterForm = (): JSX.Element => {
   };
 
   const { register } = useUserApi();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState(initialState);
   const [fieldStatus, setFieldStatus] = useState("");
 
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
+
     if (formData.password !== formData.repeatPassword) {
       setFieldStatus("form__input--wrong");
 
@@ -28,10 +31,11 @@ const RegisterForm = (): JSX.Element => {
         repeatPassword: initialState.repeatPassword,
       });
     } else {
-      register({
-        userName: formData.userName,
-        password: formData.password,
-      });
+      const registerResult = await register(formData);
+
+      if (registerResult) {
+        navigate("/login");
+      }
 
       setFormData(initialState);
     }
