@@ -1,4 +1,4 @@
-import { User } from "../../interfaces/userInterfaces";
+import { User } from "../../../interfaces/userInterfaces";
 import usersSlice, { loginUsersActionCreator } from "./userSlice";
 
 describe("Given a user slice", () => {

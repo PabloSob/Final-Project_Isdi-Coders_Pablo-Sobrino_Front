@@ -3,7 +3,7 @@ import cryptoSlice, { loadAllCryptoActionCreator } from "./cryptoSlice";
 
 describe("Given a crypto slice", () => {
   describe("When invoked with an initial state as previous crypto and a loadAllCrypto with a fake list of crypto", () => {
-    test("Then it should return the list with two wishes", () => {
+    test("Then it should return the list with two cryto", () => {
       const initialState: Crypto = [];
 
       const fakeListCrypto: Crypto = [
