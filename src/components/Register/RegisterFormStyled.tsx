@@ -40,6 +40,7 @@ const RegisterStyled = styled.div`
       border-radius: 8px;
       height: 75px;
       font-size: 20px;
+      outline: none;
     }
     &__container {
       width: 100%;
@@ -51,6 +52,9 @@ const RegisterStyled = styled.div`
       padding: 0;
       margin: 0;
       align-self: flex-start;
+    }
+    &__input--wrong {
+      border: solid red 1px;
     }
   }
   .input__title {

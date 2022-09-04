@@ -2,7 +2,7 @@ import LoginStyled from "./LoginFormStyled";
 import Button from "../Button/Button";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useUserApi from "../../hooks/useUserApi/useUserApi";
+import useUserApi from "../../hooks/useUser/useUser";
 import { SyntheticEvent, useState } from "react";
 
 const LoginForm = (): JSX.Element => {

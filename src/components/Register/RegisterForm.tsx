@@ -1,7 +1,7 @@
 import RegisterStyled from "./RegisterFormStyled";
 import Button from "../Button/Button";
 import { SyntheticEvent, useState } from "react";
-import useUserApi from "../../hooks/useUserApi/useUserApi";
+import useUserApi from "../../hooks/useUser/useUser";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -19,23 +19,31 @@ const RegisterForm = (): JSX.Element => {
   const [formData, setFormData] = useState(initialState);
   const [fieldStatus, setFieldStatus] = useState("");
 
+  const validatePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (formData.password !== event.target.value) {
+      setFieldStatus("register-form__input--wrong");
+      return;
+    }
+    setFieldStatus("");
+  };
+
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
 
     if (formData.password !== formData.repeatPassword) {
-      setFieldStatus("form__input--wrong");
+      return;
+    }
 
-      setFormData({
-        userName: formData.userName,
-        password: initialState.password,
-        repeatPassword: initialState.repeatPassword,
-      });
-    } else {
-      const registerResult = await register(formData);
+    setFormData({
+      userName: formData.userName,
+      password: initialState.password,
+      repeatPassword: initialState.repeatPassword,
+    });
 
-      if (registerResult) {
-        navigate("/login");
-      }
+    const registerResult = await register(formData);
+
+    if (registerResult) {
+      navigate("/login");
     }
   };
 
@@ -81,7 +89,7 @@ const RegisterForm = (): JSX.Element => {
             ></input>
           </div>
           <div className="register-form__input__container">
-            <label htmlFor="password" className={`input__title ${fieldStatus}`}>
+            <label htmlFor="password" className="input__title">
               Password
             </label>
             <input
@@ -100,9 +108,12 @@ const RegisterForm = (): JSX.Element => {
               Repeat Password
             </label>
             <input
-              className="register-form__input"
+              className={`register-form__input ${fieldStatus}`}
               value={formData.repeatPassword}
-              onChange={onChangeData}
+              onChange={(event) => {
+                onChangeData(event);
+                validatePassword(event);
+              }}
               required
               type="password"
               id="repeatPassword"

@@ -69,6 +69,7 @@ export const handlers = [
             team: 4,
             value: 2,
             ICO: new Date(),
+            id: "4321",
           },
           {
             title: "eflereum",
@@ -77,6 +78,7 @@ export const handlers = [
             team: 15,
             value: 3,
             ICO: new Date(),
+            id: "4322",
           },
         ],
       })
