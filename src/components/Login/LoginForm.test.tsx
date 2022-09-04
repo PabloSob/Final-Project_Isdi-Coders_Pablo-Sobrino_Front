@@ -1,15 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Wrapper from "../../utils/Wrapper";
+import { customRender } from "../../utils/customRender";
 import LoginForm from "./LoginForm";
 
 let mockLogin = { login: jest.fn() };
-jest.mock("../../hooks/useUserApi/useUserApi", () => () => mockLogin);
+jest.mock("../../hooks/useUser/useUser", () => () => mockLogin);
 
 describe("Given a Login Component", () => {
   describe("When instantiated", () => {
     test("Then it should display a form with a title, two inputs, a button and a link", () => {
-      render(<LoginForm />, { wrapper: Wrapper });
+      customRender(<LoginForm />);
 
       const elementsInScreen = [
         screen.getByAltText("a crypto logo"),
@@ -29,7 +29,7 @@ describe("Given a Login Component", () => {
         const usernameFake = "juanito";
         const passwordFake = "001001";
 
-        render(<LoginForm />, { wrapper: Wrapper });
+        customRender(<LoginForm />);
 
         const formInputs = {
           username: screen.getByLabelText("Username") as HTMLInputElement,
