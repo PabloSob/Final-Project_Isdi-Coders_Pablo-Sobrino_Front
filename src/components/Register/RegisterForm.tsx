@@ -1,7 +1,7 @@
 import RegisterStyled from "./RegisterFormStyled";
 import Button from "../Button/Button";
 import { SyntheticEvent, useState } from "react";
-import useUserApi from "../../hooks/useUser/useUser";
+import useUser from "../../hooks/useUser/useUser";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ const RegisterForm = (): JSX.Element => {
     repeatPassword: "",
   };
 
-  const { register } = useUserApi();
+  const { register } = useUser();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState(initialState);
@@ -62,14 +62,14 @@ const RegisterForm = (): JSX.Element => {
   return (
     <RegisterStyled className="form" onSubmit={onSubmitData}>
       <ToastContainer />
-      <div className="logo__container">
+      <section className="logo__container">
         <img
           className="logo__picture"
           src="img/bitcoin-logo.png"
           alt="a crypto logo"
         />
         <span className="logo__text">Crypto Realm</span>
-      </div>
+      </section>
       <h2 className="register-form__form-title">Create an account</h2>
       <form action="" className="register-form" noValidate>
         <div className="register-form__container">

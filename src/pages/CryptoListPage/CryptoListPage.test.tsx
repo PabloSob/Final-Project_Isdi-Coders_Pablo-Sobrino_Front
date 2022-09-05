@@ -1,19 +1,17 @@
-import { render, screen } from "@testing-library/react";
-import Wrapper from "../../utils/Wrapper";
+import { screen } from "@testing-library/react";
+import { customRender } from "../../utils/customRender";
 import CryptoListPage from "./CryptoListPage";
 
 describe("Given the CryptoListPage page", () => {
   describe("When it's instantiated", () => {
-    test("Then should show a list inside", () => {
-      render(
-        <Wrapper>
-          <CryptoListPage />
-        </Wrapper>
-      );
+    test("Then should show a 'CryptoList' inside", () => {
+      const headingText = "Take a look!";
 
-      const expectedTitle = screen.getByRole("list");
+      customRender(<CryptoListPage />);
 
-      expect(expectedTitle).toBeInTheDocument();
+      const expectedText = screen.getByRole("heading", { name: headingText });
+
+      expect(expectedText).toBeInTheDocument();
     });
   });
 });

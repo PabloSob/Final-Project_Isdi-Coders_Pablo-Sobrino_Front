@@ -4,7 +4,7 @@ import { act } from "react-dom/test-utils";
 import { toast } from "react-toastify";
 import { loadAllCryptoActionCreator } from "../../store/features/crypto/slices/cryptoSlice";
 import Wrapper from "../../utils/Wrapper";
-import useCryptoApi from "./useCrypto";
+import useCrypto from "./useCrypto";
 
 jest.mock("react-toastify");
 const mockUseDispatch = jest.fn();
@@ -22,7 +22,7 @@ describe("Given a useCryptoApi hook", () => {
       description: "A great crypto",
       team: 4,
       value: 2,
-      ICO: expect.any(Date),
+      ICO: expect.any(String),
       id: "4321",
     },
     {
@@ -31,7 +31,7 @@ describe("Given a useCryptoApi hook", () => {
       description: "The revolution",
       team: 15,
       value: 3,
-      ICO: expect.any(Date),
+      ICO: expect.any(String),
       id: "4322",
     },
   ];
@@ -42,7 +42,7 @@ describe("Given a useCryptoApi hook", () => {
         result: {
           current: { getAllCrypto },
         },
-      } = renderHook(useCryptoApi, { wrapper: Wrapper });
+      } = renderHook(useCrypto, { wrapper: Wrapper });
 
       await act(async () => {
         await getAllCrypto();
@@ -60,7 +60,7 @@ describe("Given a useCryptoApi hook", () => {
         result: {
           current: { getAllCrypto },
         },
-      } = renderHook(useCryptoApi, { wrapper: Wrapper });
+      } = renderHook(useCrypto, { wrapper: Wrapper });
 
       await act(async () => {
         await getAllCrypto();
@@ -81,7 +81,7 @@ describe("Given a useCryptoApi hook", () => {
           result: {
             current: { getAllCrypto },
           },
-        } = renderHook(useCryptoApi, { wrapper: Wrapper });
+        } = renderHook(useCrypto, { wrapper: Wrapper });
 
         await getAllCrypto();
 

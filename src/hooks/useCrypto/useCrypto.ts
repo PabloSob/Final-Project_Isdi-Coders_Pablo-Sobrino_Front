@@ -3,7 +3,6 @@ import { useCallback } from "react";
 import { toast } from "react-toastify";
 import { loadAllCryptoActionCreator } from "../../store/features/crypto/slices/cryptoSlice";
 import { useAppDispatch } from "../../store/hooks";
-import { ICrypto } from "../../store/interfaces/cryptoInterfaces";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -17,7 +16,7 @@ export const errorModal = (error: string) =>
     position: toast.POSITION.TOP_CENTER,
   });
 
-const useCryptoApi = () => {
+const useCrypto = () => {
   const dispatch = useAppDispatch();
 
   const getAllCrypto = useCallback(async (): Promise<void> => {
@@ -30,12 +29,11 @@ const useCryptoApi = () => {
         headers: { authorization: `Bearer ${token}` },
       });
 
-      const cryptoList = data.crypto.map((crypto: ICrypto) => ({
-        ...crypto,
-        ICO: new Date(crypto.ICO),
-      }));
+      const cryptoList = data.crypto;
 
       dispatch(loadAllCryptoActionCreator(cryptoList));
+
+      return cryptoList;
     } catch (error) {
       errorModal("Something went wrong");
     }
@@ -46,4 +44,4 @@ const useCryptoApi = () => {
   };
 };
 
-export default useCryptoApi;
+export default useCrypto;
