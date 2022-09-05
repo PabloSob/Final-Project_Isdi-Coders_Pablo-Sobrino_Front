@@ -8,6 +8,7 @@ const NotFound = (): JSX.Element => {
           className="logo__picture"
           src="img/bitcoin-logo.png"
           alt="a crypto logo"
+          height={"45pxpx"}
         />
         <span className="logo__text">Crypto Realm</span>
       </section>
