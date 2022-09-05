@@ -16,8 +16,6 @@ const CryptoCardStyled = styled.div`
     align-items: center;
     margin-bottom: 2rem;
     img {
-      width: 40px;
-      height: 40px;
       object-fit: contain;
     }
   }

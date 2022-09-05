@@ -29,7 +29,6 @@ const CryptoListStyled = styled.div`
       align-items: center;
     }
     &__picture {
-      height: 45px;
       margin-right: 10px;
     }
     &__text {

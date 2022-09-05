@@ -63,11 +63,7 @@ const RegisterForm = (): JSX.Element => {
     <RegisterStyled className="form" onSubmit={onSubmitData}>
       <ToastContainer />
       <section className="logo__container">
-        <img
-          className="logo__picture"
-          src="img/bitcoin-logo.png"
-          alt="a crypto logo"
-        />
+        <img src="img/bitcoin-logo.png" alt="a crypto logo" height={"45px"} />
         <span className="logo__text">Crypto Realm</span>
       </section>
       <h2 className="register-form__form-title">Create an account</h2>

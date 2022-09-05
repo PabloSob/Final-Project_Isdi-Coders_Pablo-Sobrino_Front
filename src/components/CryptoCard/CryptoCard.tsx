@@ -9,14 +9,20 @@ interface CryptoCardProps {
 }
 
 const CryptoCard = ({
-  crypto: { title, logo, team, value, id },
+  crypto: { title, logo, team, value },
 }: CryptoCardProps): JSX.Element => {
   return (
     <>
       <CryptoCardStyled>
         <div className="crypto-card__top-container">
           <h3 className="crypto-card__title">{title}</h3>
-          <img className="crypto-card__logo" src={logo} alt={title} />
+          <img
+            className="crypto-card__logo"
+            src={logo}
+            alt={title}
+            height={"40px"}
+            width={"40px"}
+          />
         </div>
         <div className="crypto-card__bot-container">
           <section className="crypto-card__team-container">

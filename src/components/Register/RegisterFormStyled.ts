@@ -17,7 +17,6 @@ const RegisterStyled = styled.div`
       padding-bottom: 1.5rem;
     }
     &__picture {
-      height: 45px;
       margin-right: 10px;
     }
     &__text {

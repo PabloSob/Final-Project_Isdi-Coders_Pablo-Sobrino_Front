@@ -14,7 +14,7 @@ jest.mock("../../store/hooks", () => ({
   useAppDispatch: () => mockUseDispatch,
 }));
 
-describe("Given a useCryptoApi hook", () => {
+describe("Given a useCrypto hook", () => {
   const mockCryptoList = [
     {
       title: "super coin",
@@ -55,7 +55,7 @@ describe("Given a useCryptoApi hook", () => {
       });
     });
 
-    test("Then it shoul send a loading modal", async () => {
+    test("Then it should send a loading modal", async () => {
       const {
         result: {
           current: { getAllCrypto },
