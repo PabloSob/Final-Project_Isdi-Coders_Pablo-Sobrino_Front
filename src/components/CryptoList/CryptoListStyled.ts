@@ -9,7 +9,20 @@ const CryptoListStyled = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 0px;
-  & .logo {
+  .button--small {
+    border: solid 1px #000000;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  li {
+    list-style: none;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .logo {
     &__container {
       align-self: flex-start;
       display: flex;
@@ -25,7 +38,8 @@ const CryptoListStyled = styled.div`
       font-weight: bold;
     }
   }
-  & .crypto-list {
+
+  .crypto-list {
     &__heading {
       width: 93vw;
       display: flex;
@@ -41,18 +55,20 @@ const CryptoListStyled = styled.div`
       font-size: 30px;
     }
   }
-  & .crypto-filter {
+  .crypto-filter {
     width: 100%;
+
     &__buttons {
       display: flex;
       justify-content: space-between;
+
+      & .button--big {
+        width: fit-content;
+        padding: 15px 30px;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
     }
-  }
-  & .button--big {
-    width: fit-content;
-    padding: 15px 30px;
-    margin-top: 0;
-    margin-bottom: 10px;
   }
 `;
 export default CryptoListStyled;

@@ -25,6 +25,7 @@ const CryptoList = (): JSX.Element => {
             className="logo__picture"
             src="img/bitcoin-logo.png"
             alt="a crypto logo"
+            width={"45px"}
           />
           <span className="logo__text">Crypto Realm</span>
         </section>
@@ -53,7 +54,7 @@ const CryptoList = (): JSX.Element => {
             />
           </div>
         </div>
-        <ul>
+        <ul className="crypto-list">
           {cryptoList.map((crypto) => (
             <li key={crypto.title}>
               <CryptoCard crypto={crypto} />
