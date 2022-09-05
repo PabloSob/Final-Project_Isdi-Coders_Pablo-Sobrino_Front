@@ -21,7 +21,7 @@ export const errorModal = (error: string) =>
     position: toast.POSITION.TOP_CENTER,
   });
 
-const useUserApi = () => {
+const useUser = () => {
   const dispatch = useAppDispatch();
 
   const register = async (registerUserData: ProtoUser) => {
@@ -60,4 +60,4 @@ const useUserApi = () => {
 
   return { register, login };
 };
-export default useUserApi;
+export default useUser;

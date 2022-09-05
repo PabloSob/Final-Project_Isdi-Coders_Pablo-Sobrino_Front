@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import { toast } from "react-toastify";
 import { ProtoUser } from "../../store/interfaces/userInterfaces";
 import Wrapper from "../../utils/Wrapper";
-import useUserApi from "./useUser";
+import useUser from "./useUser";
 
 jest.mock("react-toastify");
 
@@ -25,7 +25,7 @@ describe("Given a useUser hook", () => {
         result: {
           current: { register },
         },
-      } = renderHook(useUserApi, { wrapper: Wrapper });
+      } = renderHook(useUser, { wrapper: Wrapper });
 
       await register(mockUser);
 
@@ -45,7 +45,7 @@ describe("Given a useUser hook", () => {
           result: {
             current: { register },
           },
-        } = renderHook(useUserApi, { wrapper: Wrapper });
+        } = renderHook(useUser, { wrapper: Wrapper });
 
         await register(mockUser2);
 
@@ -65,7 +65,7 @@ describe("Given a useUser hook", () => {
             result: {
               current: { login },
             },
-          } = renderHook(useUserApi, { wrapper: Wrapper });
+          } = renderHook(useUser, { wrapper: Wrapper });
 
           await login(mockUserTest);
 
@@ -94,7 +94,7 @@ describe("Given a useUser hook", () => {
             result: {
               current: { login },
             },
-          } = renderHook(useUserApi, { wrapper: Wrapper });
+          } = renderHook(useUser, { wrapper: Wrapper });
 
           await login(mockUserTest);
 

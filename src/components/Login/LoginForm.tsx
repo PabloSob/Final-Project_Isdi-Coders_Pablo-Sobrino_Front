@@ -2,7 +2,7 @@ import LoginStyled from "./LoginFormStyled";
 import Button from "../Button/Button";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useUserApi from "../../hooks/useUser/useUser";
+import useUser from "../../hooks/useUser/useUser";
 import { SyntheticEvent, useState } from "react";
 
 const LoginForm = (): JSX.Element => {
@@ -11,7 +11,7 @@ const LoginForm = (): JSX.Element => {
     password: "",
   };
 
-  const { login } = useUserApi();
+  const { login } = useUser();
   const [formData, setFormData] = useState(initialState);
 
   const onSubmitData = (event: SyntheticEvent) => {
@@ -32,14 +32,14 @@ const LoginForm = (): JSX.Element => {
   return (
     <LoginStyled className="form" onSubmit={onSubmitData}>
       <ToastContainer />
-      <div className="logo__container">
+      <section className="logo__container">
         <img
           className="logo__picture"
           src="img/bitcoin-logo.png"
           alt="a crypto logo"
         />
         <span className="logo__text">Crypto Realm</span>
-      </div>
+      </section>
       <h2 className="login-form__form-title">Hi, welcome back!</h2>
       <form action="" className="login-form" noValidate>
         <div className="login-form__container">
