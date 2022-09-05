@@ -1,5 +1,8 @@
 import { User } from "../../../interfaces/userInterfaces";
-import usersSlice, { loginUsersActionCreator } from "./userSlice";
+import userSlice, {
+  loginUsersActionCreator,
+  logoutActionCreator,
+} from "./userSlice";
 
 describe("Given a user slice", () => {
   describe("When invoked with an initial state as previous user and a login user action creator with a fakeUserTest", () => {
@@ -15,12 +18,31 @@ describe("Given a user slice", () => {
         userName: "Vivaldi",
       };
 
-      const user = usersSlice(
+      const fakeUser = userSlice(
         initialState,
         loginUsersActionCreator(fakeUserTest)
       );
 
-      expect(user).toStrictEqual(fakeUserTest);
+      expect(fakeUser).toStrictEqual(fakeUserTest);
+    });
+  });
+  describe("When invoked with a fakeUser and logoutActionCreator", () => {
+    test("Then it should return a initial State", () => {
+      const fakeUser: User = {
+        id: "0234342354325",
+        token: "qwertytyoog",
+        userName: "Vivaldi",
+      };
+
+      const initialState: User = {
+        id: "",
+        token: "",
+        userName: "",
+      };
+
+      const logoutUser = userSlice(fakeUser, logoutActionCreator());
+
+      expect(logoutUser).toStrictEqual(initialState);
     });
   });
 });
