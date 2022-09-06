@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useUser from "../../hooks/useUser/useUser";
 import { SyntheticEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = (): JSX.Element => {
   const initialState = {
@@ -12,6 +13,7 @@ const LoginForm = (): JSX.Element => {
   };
 
   const { login } = useUser();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
 
   const onSubmitData = (event: SyntheticEvent) => {
@@ -20,6 +22,7 @@ const LoginForm = (): JSX.Element => {
       userName: formData.userName,
       password: formData.password,
     });
+    navigate("/crypto");
   };
 
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
