@@ -1,13 +1,17 @@
 import axios, { AxiosResponse } from "axios";
-import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
 import {
   ProtoUser,
   User,
   UserToken,
 } from "../../store/interfaces/userInterfaces";
-import { loginUsersActionCreator } from "../../store/features/user/slices/userSlice";
+import {
+  loginUsersActionCreator,
+  logoutActionCreator,
+} from "../../store/features/user/slices/userSlice";
 import { useAppDispatch } from "../../store/hooks";
+import { PayloadAction } from "@reduxjs/toolkit";
+import decodeToken from "../../utils/decodeToken";
 
 export const apiURL = process.env.REACT_APP_API_URL;
 
@@ -47,10 +51,12 @@ const useUser = () => {
       );
 
       if (token) {
+        const userInfo: User = decodeToken(token);
+
+        dispatch(loginUsersActionCreator(userInfo));
         localStorage.setItem("token", token);
 
-        const userInfo: User = { ...jwtDecode(token), token };
-        dispatch(loginUsersActionCreator(userInfo));
+        return true;
       }
     } catch (error: any) {
       errorModal("Something went wrong...");
@@ -58,6 +64,11 @@ const useUser = () => {
     }
   };
 
-  return { register, login };
+  const logout = () => {
+    dispatch<PayloadAction>(logoutActionCreator());
+    localStorage.removeItem("token");
+  };
+
+  return { register, login, logout };
 };
 export default useUser;

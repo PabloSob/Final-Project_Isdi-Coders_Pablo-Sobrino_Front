@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { customRender } from "../../utils/customRender";
 import LoginForm from "./LoginForm";
@@ -50,7 +50,7 @@ describe("Given a Login Component", () => {
       test("Then it should call the mockLogin with the data user", async () => {
         const usernameFake = "juanito";
         const passwordFake = "001001";
-        render(<LoginForm />);
+        customRender(<LoginForm />);
         const form = {
           userName: screen.getByLabelText("Username") as HTMLInputElement,
           password: screen.getByLabelText("Password") as HTMLInputElement,
