@@ -1,5 +1,7 @@
 import { renderHook } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import { toast } from "react-toastify";
+import { logoutActionCreator } from "../../store/features/user/slices/userSlice";
 import { ProtoUser } from "../../store/interfaces/userInterfaces";
 import Wrapper from "../../utils/Wrapper";
 import useUser from "./useUser";
@@ -101,6 +103,21 @@ describe("Given a useUser hook", () => {
           expect(toast.error).toHaveBeenCalledWith("Something went wrong...", {
             position: toast.POSITION.TOP_CENTER,
           });
+        });
+      });
+      describe("When logout function is called", () => {
+        test("Then it should dispatch the logout action creator", async () => {
+          const {
+            result: {
+              current: { logout },
+            },
+          } = renderHook(useUser, { wrapper: Wrapper });
+
+          act(() => {
+            logout();
+          });
+
+          expect(mockUseDispatch).toHaveBeenCalledWith(logoutActionCreator());
         });
       });
     });
