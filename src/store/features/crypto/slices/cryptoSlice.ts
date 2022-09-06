@@ -10,12 +10,16 @@ const cryptoSlice = createSlice({
     loadAllCrypto: (previousCrypto, action: PayloadAction<Crypto>) => [
       ...action.payload,
     ],
+    deleteCrypto: (previousState, action: PayloadAction<string>) =>
+      previousState.filter((crypto) => crypto.id !== action.payload),
   },
 });
 
 export const { reducer: cryptoReducer } = cryptoSlice;
 
-export const { loadAllCrypto: loadAllCryptoActionCreator } =
-  cryptoSlice.actions;
+export const {
+  loadAllCrypto: loadAllCryptoActionCreator,
+  deleteCrypto: deleteCryptoActionCreator,
+} = cryptoSlice.actions;
 
 export default cryptoSlice.reducer;
