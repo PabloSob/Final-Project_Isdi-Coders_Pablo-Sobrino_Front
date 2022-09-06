@@ -5,17 +5,25 @@ import { RootState } from "../../store/store";
 import CryptoCard from "../CryptoCard/CryptoCard";
 import CryptoListStyled from "./CryptoListStyled";
 import Button from "../Button/Button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ButtonStyled } from "../Button/ButtonStyled";
+import useUser from "../../hooks/useUser/useUser";
 
 const CryptoList = (): JSX.Element => {
   const { getAllCrypto } = useCrypto();
+  const { logout } = useUser();
   const cryptoList = useAppSelector((state: RootState) => state.crypto);
+  const navigate = useNavigate();
   const isDisabled = false;
 
   useEffect(() => {
     getAllCrypto();
   }, [getAllCrypto]);
+
+  const logoutLink = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <>
@@ -31,9 +39,9 @@ const CryptoList = (): JSX.Element => {
         </section>
         <section className="crypto-list__heading">
           <h2 className="crypto-list__title">Take a look!</h2>
-          <Link to={""}>
-            <ButtonStyled className="button-link">Logout</ButtonStyled>
-          </Link>
+          <ButtonStyled onClick={logoutLink} className="button-link">
+            Logout
+          </ButtonStyled>
         </section>
         <div className="crypto-filter">
           <span className="text">Filter by:</span>

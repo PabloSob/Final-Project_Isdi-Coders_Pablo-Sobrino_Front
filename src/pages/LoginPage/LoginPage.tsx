@@ -11,7 +11,7 @@ const LoginPage = (): JSX.Element => {
         <span className="register-text__text">
           Don't have an account?
           <Link to={"/register"}>
-            <ButtonStyled className="button-link">Sign up</ButtonStyled>
+            <ButtonStyled className="button-link">Sign in</ButtonStyled>
           </Link>
         </span>
       </LinkStyledLogin>
