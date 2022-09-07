@@ -1,4 +1,5 @@
-import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks";
 
 interface RouteProtectorProps {
@@ -7,8 +8,15 @@ interface RouteProtectorProps {
 
 const RouteProtector = ({ children }: RouteProtectorProps): JSX.Element => {
   const hasToken = useAppSelector((state) => state.user.token);
+  const navigate = useNavigate();
 
-  return hasToken ? <>{children}</> : <Navigate to="/login" />;
+  useEffect(() => {
+    if (!hasToken) {
+      navigate("/login");
+    }
+  }, [hasToken, navigate]);
+
+  return <>{hasToken && children}</>;
 };
 
 export default RouteProtector;
