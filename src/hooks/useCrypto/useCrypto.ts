@@ -33,15 +33,15 @@ const useCrypto = () => {
 
     try {
       loadingModal("Please wait");
-      const { data } = await axios.get(loadCryptoUrl, {
+      const {
+        data: { crypto },
+      } = await axios.get(loadCryptoUrl, {
         headers: { authorization: `Bearer ${token}` },
       });
 
-      const cryptoList = data.crypto;
+      dispatch(loadAllCryptoActionCreator(crypto));
 
-      dispatch(loadAllCryptoActionCreator(cryptoList));
-
-      return cryptoList;
+      return crypto;
     } catch (error) {
       errorModal("Something went wrong");
     }
@@ -61,7 +61,7 @@ const useCrypto = () => {
         });
 
         dispatch(deleteCryptoActionCreator(cryptoId));
-        successModal("The crypto has been deleted!");
+        successModal("The crypto has been deleted");
       } catch (error) {
         errorModal("Something went wrong");
       }

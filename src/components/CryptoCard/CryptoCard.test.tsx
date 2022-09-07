@@ -1,20 +1,27 @@
-import { screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { store } from "../../store/store";
 import { customRender } from "../../utils/customRender";
 import CryptoCard from "./CryptoCard";
+
+let mockDeleteCrypto = { deleteCrypto: jest.fn() };
+jest.mock("../../hooks/useCrypto/useCrypto", () => () => mockDeleteCrypto);
+
+const crypto = {
+  title: "super coin",
+  logo: "/crypto.png",
+  description: "",
+  team: 4,
+  value: 2,
+  ICO: expect.any(String),
+  id: "",
+};
 
 describe("Given a CryptoCard component", () => {
   describe("When instantiated", () => {
     test("Then it should show a title, logo, team, value and 2 butons", () => {
-      const crypto = {
-        title: "super coin",
-        logo: "/crypto.png",
-        description: "",
-        team: 4,
-        value: 2,
-        ICO: expect.any(String),
-        id: "",
-      };
-
       customRender(<CryptoCard key={crypto.title} crypto={crypto} />);
 
       const cryptoTitle = screen.getByRole("heading", {
@@ -37,6 +44,25 @@ describe("Given a CryptoCard component", () => {
       expect(cryptoValue).toBeInTheDocument();
       expect(buttonCreate).toBeInTheDocument();
       expect(buttonDetails).toBeInTheDocument();
+    });
+  });
+  describe("When click on Delete button", () => {
+    test("Then it should call the deleteCrypto function", async () => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CryptoCard key={crypto.title} crypto={crypto} />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const deleteButton = screen.getByText("Delete");
+
+      await userEvent.click(deleteButton);
+
+      expect(deleteButton).toBeInTheDocument();
+
+      await expect(mockDeleteCrypto.deleteCrypto).toHaveBeenCalled();
     });
   });
 });
