@@ -1,13 +1,36 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import RouteProtector from "./components/RouteProtector/RouteProtector";
 import CryptoListPage from "./pages/CryptoListPage/CryptoListPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import { loginUsersActionCreator } from "./store/features/user/slices/userSlice";
+import { useAppDispatch } from "./store/hooks";
 import styledMainTheme from "./styleMainTheme";
+import decodeToken from "./utils/decodeToken";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const localUser = decodeToken(token);
+      dispatch(loginUsersActionCreator(localUser));
+    }
+    navigate(pathname);
+  }, [dispatch, navigate, pathname]);
+
   return (
     <ThemeProvider theme={styledMainTheme}>
       <Routes>
