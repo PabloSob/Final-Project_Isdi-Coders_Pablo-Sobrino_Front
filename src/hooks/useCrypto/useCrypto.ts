@@ -1,13 +1,21 @@
 import axios from "axios";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
-import { loadAllCryptoActionCreator } from "../../store/features/crypto/slices/cryptoSlice";
+import {
+  deleteCryptoActionCreator,
+  loadAllCryptoActionCreator,
+} from "../../store/features/crypto/slices/cryptoSlice";
 import { useAppDispatch } from "../../store/hooks";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
 export const loadingModal = (loading: string) =>
   toast.loading(loading, {
+    position: toast.POSITION.TOP_CENTER,
+  });
+
+export const successModal = (message: string) =>
+  toast.success(message, {
     position: toast.POSITION.TOP_CENTER,
   });
 
@@ -39,8 +47,31 @@ const useCrypto = () => {
     }
   }, [dispatch]);
 
+  const deleteCrypto = useCallback(
+    async (cryptoId: string) => {
+      const token = localStorage.getItem("token");
+      const deleteCryptoUrl = `${apiURL}crypto/`;
+
+      try {
+        loadingModal("Please wait");
+        await axios.delete(`${deleteCryptoUrl}${cryptoId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        dispatch(deleteCryptoActionCreator(cryptoId));
+        successModal("The crypto has been deleted!");
+      } catch (error) {
+        errorModal("Something went wrong");
+      }
+    },
+    [dispatch]
+  );
+  toast.dismiss();
   return {
     getAllCrypto,
+    deleteCrypto,
   };
 };
 

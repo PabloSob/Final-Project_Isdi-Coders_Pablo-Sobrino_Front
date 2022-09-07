@@ -5,12 +5,19 @@ const CryptoListStyled = styled.div`
   margin: 15px;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 0px;
   .button--small {
     border: solid 1px #000000;
+  }
+  .link {
+    border: none;
+    font-size: 24px;
+    margin-bottom: 5px;
+    background-color: #deefe7;
+    font-weight: bold;
+    color: ${(props) => props.theme.textThirdColor};
   }
   ul {
     margin: 0;
