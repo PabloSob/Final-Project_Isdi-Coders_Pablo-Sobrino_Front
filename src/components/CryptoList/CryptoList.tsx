@@ -29,17 +29,19 @@ const CryptoList = (): JSX.Element => {
     <>
       <CryptoListStyled>
         <section className="logo__container">
-          <img
-            className="logo__picture"
-            src="img/bitcoin-logo.png"
-            alt="a crypto logo"
-            width={"45px"}
-          />
+          <h1>
+            <img
+              className="logo__picture"
+              src="img/bitcoin-logo.png"
+              alt="a crypto logo"
+              width={"45px"}
+            />
+          </h1>
           <span className="logo__text">Crypto Realm</span>
         </section>
         <section className="crypto-list__heading">
           <h2 className="crypto-list__title">Take a look!</h2>
-          <ButtonStyled onClick={logoutLink} className="button-link">
+          <ButtonStyled onClick={logoutLink} className="link">
             Logout
           </ButtonStyled>
         </section>

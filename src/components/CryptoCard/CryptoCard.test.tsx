@@ -28,7 +28,7 @@ describe("Given a CryptoCard component", () => {
         name: "Delete",
       });
       const buttonViewDetails = screen.getByRole("button", {
-        name: "View Details",
+        name: "Details",
       });
 
       expect(cryptoTitle).toBeInTheDocument();

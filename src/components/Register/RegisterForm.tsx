@@ -2,7 +2,6 @@ import RegisterStyled from "./RegisterFormStyled";
 import Button from "../Button/Button";
 import { SyntheticEvent, useState } from "react";
 import useUser from "../../hooks/useUser/useUser";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
@@ -61,9 +60,15 @@ const RegisterForm = (): JSX.Element => {
 
   return (
     <RegisterStyled className="form" onSubmit={onSubmitData}>
-      <ToastContainer />
       <section className="logo__container">
-        <img src="img/bitcoin-logo.png" alt="a crypto logo" height={"45px"} />
+        <h1>
+          <img
+            className="logo__picture"
+            src="img/bitcoin-logo.png"
+            alt="a crypto logo"
+            height={"45px"}
+          />
+        </h1>
         <span className="logo__text">Crypto Realm</span>
       </section>
       <h2 className="register-form__form-title">Create an account</h2>
