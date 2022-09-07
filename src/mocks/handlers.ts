@@ -1,5 +1,7 @@
 import { rest } from "msw";
 
+const idCrypto: string = "43552lkjhfdkshgh45";
+
 export const handlers = [
   rest.post(
     `${process.env.REACT_APP_API_URL}users/register`,
@@ -84,4 +86,24 @@ export const handlers = [
       })
     );
   }),
+  rest.delete(
+    `${process.env.REACT_APP_API_URL}crypto/${idCrypto}`,
+    async (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          cryptoDelete: {
+            id: idCrypto,
+          },
+        })
+      );
+    }
+  ),
+
+  rest.delete(
+    `${process.env.REACT_APP_API_URL}crypto/wrongId`,
+    async (req, res, ctx) => {
+      return res(ctx.status(404), ctx.json({ error: "Something went wrong" }));
+    }
+  ),
 ];

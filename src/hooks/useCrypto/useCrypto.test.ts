@@ -2,7 +2,10 @@ import { renderHook, waitFor } from "@testing-library/react";
 import axios from "axios";
 import { act } from "react-dom/test-utils";
 import { toast } from "react-toastify";
-import { loadAllCryptoActionCreator } from "../../store/features/crypto/slices/cryptoSlice";
+import {
+  deleteCryptoActionCreator,
+  loadAllCryptoActionCreator,
+} from "../../store/features/crypto/slices/cryptoSlice";
 import Wrapper from "../../utils/Wrapper";
 import useCrypto from "./useCrypto";
 
@@ -90,6 +93,52 @@ describe("Given a useCrypto hook", () => {
         });
 
         delete axios.defaults.headers.get["IsTestError"];
+      });
+    });
+    describe("When invoke deleteCrypto function with a valid crypto id", () => {
+      const {
+        result: {
+          current: { deleteCrypto },
+        },
+      } = renderHook(useCrypto);
+
+      const idCrypto: string = "43552lkjhfdkshgh45";
+
+      test("Then it should call the dispatch with the delete action creator with the id", async () => {
+        await act(async () => {
+          await deleteCrypto(idCrypto);
+        });
+
+        expect(toast.success).toHaveBeenCalledWith(
+          "The crypto has been deleted",
+          {
+            position: toast.POSITION.TOP_CENTER,
+          }
+        );
+
+        await waitFor(() => {
+          expect(mockUseDispatch).toHaveBeenCalledWith(
+            deleteCryptoActionCreator(idCrypto)
+          );
+        });
+      });
+
+      describe("When called with an invalid project id", () => {
+        test("Then it should not dispatch the delete action", async () => {
+          await act(async () => {
+            await deleteCrypto("WrongId");
+          });
+
+          expect(toast.error).toHaveBeenCalledWith("Something went wrong", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+
+          await waitFor(() => {
+            expect(mockUseDispatch).not.toHaveBeenCalledWith(
+              deleteCryptoActionCreator(idCrypto)
+            );
+          });
+        });
       });
     });
   });
