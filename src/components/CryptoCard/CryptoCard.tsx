@@ -3,14 +3,20 @@ import { faPeopleGroup, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { ICrypto } from "../../store/interfaces/cryptoInterfaces";
 import Button from "../Button/Button";
 import CryptoCardStyled from "./CryptoCardStyled";
+import useCrypto from "../../hooks/useCrypto/useCrypto";
 
 interface CryptoCardProps {
   crypto: ICrypto;
 }
 
 const CryptoCard = ({
-  crypto: { title, logo, team, value },
+  crypto: { title, logo, team, value, id },
 }: CryptoCardProps): JSX.Element => {
+  const { deleteCrypto } = useCrypto();
+
+  const cryptoDelete = () => {
+    deleteCrypto(id);
+  };
   return (
     <>
       <CryptoCardStyled>
@@ -32,7 +38,7 @@ const CryptoCard = ({
             </div>
             <span className="crypto-card__box">{team}</span>
             <Button
-              buttonText="View Details"
+              buttonText="Details"
               type="submit"
               classNameTypeButton="button--big"
               actionOnclick={() => {}}
@@ -48,7 +54,7 @@ const CryptoCard = ({
               buttonText="Delete"
               type="submit"
               classNameTypeButton="button--big"
-              actionOnclick={() => {}}
+              actionOnclick={cryptoDelete}
             />
           </section>
         </div>

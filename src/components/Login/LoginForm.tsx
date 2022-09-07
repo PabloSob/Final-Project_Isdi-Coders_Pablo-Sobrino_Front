@@ -1,10 +1,8 @@
 import LoginStyled from "./LoginFormStyled";
 import Button from "../Button/Button";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useUser from "../../hooks/useUser/useUser";
 import { SyntheticEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const LoginForm = (): JSX.Element => {
   const initialState = {
@@ -13,7 +11,7 @@ const LoginForm = (): JSX.Element => {
   };
 
   const { login } = useUser();
-  const navigate = useNavigate();
+
   const [formData, setFormData] = useState(initialState);
 
   const onSubmitData = (event: SyntheticEvent) => {
@@ -22,7 +20,6 @@ const LoginForm = (): JSX.Element => {
       userName: formData.userName,
       password: formData.password,
     });
-    navigate("/crypto");
   };
 
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,14 +31,15 @@ const LoginForm = (): JSX.Element => {
 
   return (
     <LoginStyled className="form" onSubmit={onSubmitData}>
-      <ToastContainer />
       <section className="logo__container">
-        <img
-          className="logo__picture"
-          src="img/bitcoin-logo.png"
-          alt="a crypto logo"
-          height={"45pxpx"}
-        />
+        <h1>
+          <img
+            className="logo__picture"
+            src="img/bitcoin-logo.png"
+            alt="a crypto logo"
+            height={"45pxpx"}
+          />
+        </h1>
         <span className="logo__text">Crypto Realm</span>
       </section>
       <h2 className="login-form__form-title">Hi, welcome back!</h2>

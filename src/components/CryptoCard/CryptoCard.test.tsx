@@ -27,8 +27,8 @@ describe("Given a CryptoCard component", () => {
       const buttonCreate = screen.getByRole("button", {
         name: "Delete",
       });
-      const buttonViewDetails = screen.getByRole("button", {
-        name: "View Details",
+      const buttonDetails = screen.getByRole("button", {
+        name: "Details",
       });
 
       expect(cryptoTitle).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe("Given a CryptoCard component", () => {
       expect(cryptoTeam).toBeInTheDocument();
       expect(cryptoValue).toBeInTheDocument();
       expect(buttonCreate).toBeInTheDocument();
-      expect(buttonViewDetails).toBeInTheDocument();
+      expect(buttonDetails).toBeInTheDocument();
     });
   });
 });
