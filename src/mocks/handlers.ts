@@ -106,4 +106,33 @@ export const handlers = [
       return res(ctx.status(404), ctx.json({ error: "Something went wrong" }));
     }
   ),
+  rest.get(
+    `${process.env.REACT_APP_API_URL}crypto/${idCrypto}`,
+    (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          crypto: {
+            id: idCrypto,
+            title: "eflereum",
+            logo: "/eflereum.png",
+            description: "The revolution",
+            team: 15,
+            value: 3,
+            ICO: "2022-09-07T19:12:29.422Z",
+          },
+        })
+      );
+    }
+  ),
+
+  rest.get(
+    `${process.env.REACT_APP_API_URL}crypto/wrongId`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(404),
+        ctx.json({ error: "Can not show details from this crypto" })
+      );
+    }
+  ),
 ];
