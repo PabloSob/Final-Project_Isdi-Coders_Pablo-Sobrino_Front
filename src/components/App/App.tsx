@@ -7,15 +7,15 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import RouteProtector from "./components/RouteProtector/RouteProtector";
-import CryptoListPage from "./pages/CryptoListPage/CryptoListPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import { loginUsersActionCreator } from "./store/features/user/slices/userSlice";
-import { useAppDispatch } from "./store/hooks";
-import styledMainTheme from "./styleMainTheme";
-import decodeToken from "./utils/decodeToken";
+import CryptoListPage from "../../pages/CryptoListPage/CryptoListPage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
+import RegisterPage from "../../pages/RegisterPage/RegisterPage";
+import { loginUsersActionCreator } from "../../store/features/user/slices/userSlice";
+import { useAppDispatch } from "../../store/hooks";
+import styledMainTheme from "../../styleMainTheme";
+import decodeToken from "../../utils/decodeToken";
+import RouteProtector from "../RouteProtector/RouteProtector";
 
 function App() {
   const dispatch = useAppDispatch();
