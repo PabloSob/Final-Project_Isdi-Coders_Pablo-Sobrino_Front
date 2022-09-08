@@ -140,6 +140,48 @@ describe("Given a useCrypto hook", () => {
           });
         });
       });
+      describe("When it's invoked with getOneGameById with the correct id", () => {
+        test("Then it should return a crypto with this id", async () => {
+          const idCrypto = "43552lkjhfdkshgh45";
+
+          const mockCrypto = {
+            id: idCrypto,
+            title: "eflereum",
+            logo: "/eflereum.png",
+            description: "The revolution",
+            team: 15,
+            value: 3,
+            ICO: "2022-09-07T19:12:29.422Z",
+          };
+
+          const {
+            result: {
+              current: { getCryptoById },
+            },
+          } = renderHook(useCrypto, { wrapper: Wrapper });
+
+          const crypto = await getCryptoById(idCrypto);
+
+          await expect(crypto).toStrictEqual(mockCrypto);
+        });
+
+        test("And if can't return a crypto, it should call the error modal", async () => {
+          const {
+            result: {
+              current: { getCryptoById },
+            },
+          } = renderHook(useCrypto, { wrapper: Wrapper });
+
+          await getCryptoById("wrongId");
+
+          expect(toast.error).toHaveBeenCalledWith(
+            "Can not show details from this crypto",
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
+          );
+        });
+      });
     });
   });
 });
