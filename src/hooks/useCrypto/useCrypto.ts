@@ -68,10 +68,24 @@ const useCrypto = () => {
     },
     [dispatch]
   );
+
+  const getCryptoById = useCallback(async (idCrypto: string) => {
+    const getCryptoUrl = `${apiURL}crypto/`;
+    try {
+      const {
+        data: { crypto },
+      } = await axios.get(`${getCryptoUrl}${idCrypto}`);
+      return crypto;
+    } catch (error) {
+      errorModal("Can not show details from this crypto");
+    }
+  }, []);
+
   toast.dismiss();
   return {
     getAllCrypto,
     deleteCrypto,
+    getCryptoById,
   };
 };
 
