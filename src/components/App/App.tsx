@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import CryptoListPage from "../../pages/CryptoListPage/CryptoListPage";
+import DetailPage from "../../pages/DetailPage/DetailPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
@@ -45,6 +46,7 @@ function App() {
             </RouteProtector>
           }
         />
+        <Route path="/crypto/details/:id" element={<DetailPage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </ThemeProvider>
