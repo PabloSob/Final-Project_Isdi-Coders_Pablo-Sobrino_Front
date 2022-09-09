@@ -16,7 +16,6 @@ import { loginUsersActionCreator } from "../../store/features/user/slices/userSl
 import { useAppDispatch } from "../../store/hooks";
 import styledMainTheme from "../../styleMainTheme";
 import decodeToken from "../../utils/decodeToken";
-import RouteProtector from "../RouteProtector/RouteProtector";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -38,14 +37,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/crypto"
-          element={
-            <RouteProtector>
-              <CryptoListPage />
-            </RouteProtector>
-          }
-        />
+        <Route path="/crypto" element={<CryptoListPage />} />
         <Route path="/crypto/details/:id" element={<DetailPage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
