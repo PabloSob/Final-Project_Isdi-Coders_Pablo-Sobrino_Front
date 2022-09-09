@@ -10,6 +10,8 @@ const CryptoListStyled = styled.div`
   margin-bottom: 0px;
   .button--small {
     border: solid 1px #000000;
+    align-items: center;
+    padding-left: 22px;
   }
   .link {
     border: none;

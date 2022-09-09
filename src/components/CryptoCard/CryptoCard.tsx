@@ -4,6 +4,7 @@ import { ICrypto } from "../../store/interfaces/cryptoInterfaces";
 import Button from "../Button/Button";
 import CryptoCardStyled from "./CryptoCardStyled";
 import useCrypto from "../../hooks/useCrypto/useCrypto";
+import { useNavigate } from "react-router-dom";
 
 interface CryptoCardProps {
   crypto: ICrypto;
@@ -14,9 +15,12 @@ const CryptoCard = ({
 }: CryptoCardProps): JSX.Element => {
   const { deleteCrypto } = useCrypto();
 
+  const navigate = useNavigate();
+
   const cryptoDelete = () => {
     deleteCrypto(id);
   };
+
   return (
     <>
       <CryptoCardStyled>
@@ -41,7 +45,9 @@ const CryptoCard = ({
               buttonText="Details"
               type="submit"
               classNameTypeButton="button--big"
-              actionOnclick={() => {}}
+              actionOnclick={() => {
+                navigate(`/crypto/details/${id}`);
+              }}
             />
           </section>
           <section className="crypto-card__value-container">
