@@ -41,7 +41,7 @@ const CryptoList = (): JSX.Element => {
         </section>
         <section className="crypto-list__heading">
           <h2 className="crypto-list__title">Take a look!</h2>
-          <ButtonStyled onClick={logoutLink} className="link">
+          <ButtonStyled onClick={logoutLink} className="link" id="logout">
             Logout
           </ButtonStyled>
         </section>
