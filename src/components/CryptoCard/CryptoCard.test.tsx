@@ -9,6 +9,13 @@ import CryptoCard from "./CryptoCard";
 let mockDeleteCrypto = { deleteCrypto: jest.fn() };
 jest.mock("../../hooks/useCrypto/useCrypto", () => () => mockDeleteCrypto);
 
+const mockNavigate = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockNavigate,
+}));
+
 const crypto = {
   title: "super coin",
   logo: "/crypto.png",
@@ -63,6 +70,25 @@ describe("Given a CryptoCard component", () => {
       expect(deleteButton).toBeInTheDocument();
 
       await expect(mockDeleteCrypto.deleteCrypto).toHaveBeenCalled();
+    });
+  });
+  describe("When click on Details button", () => {
+    test("Then it should redirect to the Details", async () => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CryptoCard key={crypto.title} crypto={crypto} />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const buttonDetails = screen.getByText("Details");
+
+      await userEvent.click(buttonDetails);
+
+      expect(buttonDetails).toBeInTheDocument();
+
+      expect(mockNavigate).toHaveBeenCalled();
     });
   });
 });
