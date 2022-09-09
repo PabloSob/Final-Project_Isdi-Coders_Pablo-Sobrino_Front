@@ -3,6 +3,7 @@ import cryptoSlice, {
   cryptoReducer,
   deleteCryptoActionCreator,
   loadAllCryptoActionCreator,
+  createCryptoActionCreator,
 } from "./cryptoSlice";
 
 describe("Given a crypto slice", () => {
@@ -86,6 +87,29 @@ describe("Given a deleteCryptoActionCreator function", () => {
 
         expect(result).toStrictEqual(expectedResult);
       });
+    });
+  });
+  describe("When called with a createCrypto action", () => {
+    test("Then it should return an action with a type 'crypto/createCrypto' and said crypto as payload", () => {
+      const initialState = [] as Crypto;
+
+      const cryptoFake: ICrypto = {
+        id: "4321",
+        title: "Cocoin",
+        logo: "/crypto.png",
+        description: "a great crypto",
+        team: 2,
+        value: 3,
+        ICO: new Date(),
+      };
+
+      const expectedResult = [cryptoFake] as Crypto;
+
+      const actionFake = createCryptoActionCreator(cryptoFake);
+
+      const result = cryptoReducer(initialState, actionFake);
+
+      expect(result).toStrictEqual(expectedResult);
     });
   });
 });
