@@ -5,7 +5,6 @@ const LoginStyled = styled.div`
   margin: 15px;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 0px;
@@ -54,6 +53,7 @@ const LoginStyled = styled.div`
     display: block;
     margin-bottom: 10px;
     padding: 7px;
+    padding-left: 0;
     color: #159a9c;
     font-size: large;
     font-weight: bold;

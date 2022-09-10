@@ -9,6 +9,7 @@ const LinkStyledLogin = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
+    margin-top: 15px;
   }
 `;
 

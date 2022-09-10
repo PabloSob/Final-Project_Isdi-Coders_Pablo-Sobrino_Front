@@ -135,4 +135,31 @@ export const handlers = [
       );
     }
   ),
+  rest.post(
+    `${process.env.REACT_APP_API_URL}crypto/`,
+    async (req, res, ctx) => {
+      const body = await req.json();
+      if (!body.logo) {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            error: "Error creating crypto",
+          })
+        );
+      }
+
+      return res(
+        ctx.status(201),
+        ctx.json({
+          id: idCrypto,
+          title: "eflereum",
+          logo: "/eflereum.png",
+          description: "The revolution",
+          team: 15,
+          value: 3,
+          ICO: "2022-09-07T19:12:29.422Z",
+        })
+      );
+    }
+  ),
 ];
