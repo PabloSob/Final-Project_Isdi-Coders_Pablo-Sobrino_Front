@@ -5,7 +5,6 @@ const RegisterStyled = styled.div`
   margin: 15px;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   display: flex;
   justify-content: space-around;
   margin-bottom: 0px;
@@ -60,6 +59,7 @@ const RegisterStyled = styled.div`
     display: block;
     margin-bottom: 10px;
     padding: 7px;
+    padding-left: 0px;
     color: #159a9c;
     font-size: large;
     font-weight: bold;
