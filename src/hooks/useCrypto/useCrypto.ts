@@ -2,10 +2,12 @@ import axios from "axios";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
 import {
+  createCryptoActionCreator,
   deleteCryptoActionCreator,
   loadAllCryptoActionCreator,
 } from "../../store/features/crypto/slices/cryptoSlice";
 import { useAppDispatch } from "../../store/hooks";
+import { ICrypto } from "../../store/interfaces/cryptoInterfaces";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -81,11 +83,36 @@ const useCrypto = () => {
     }
   }, []);
 
+  const createCrypto = useCallback(
+    async (newCrypto: ICrypto) => {
+      const token = localStorage.getItem("token");
+      const createURL = `${apiURL}crypto/`;
+
+      try {
+        const {
+          data: { cryptoCreated },
+        } = await axios.post(`${createURL}`, newCrypto, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        dispatch(createCryptoActionCreator(cryptoCreated));
+        successModal("Crypto created successfully!");
+        return cryptoCreated;
+      } catch (error) {
+        errorModal("Cannot create the crypto");
+      }
+    },
+    [dispatch]
+  );
+
   toast.dismiss();
   return {
     getAllCrypto,
-    deleteCrypto,
     getCryptoById,
+    createCrypto,
+    deleteCrypto,
   };
 };
 
