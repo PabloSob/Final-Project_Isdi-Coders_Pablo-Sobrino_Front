@@ -123,7 +123,7 @@ describe("Given a useCrypto hook", () => {
         });
       });
 
-      describe("When called with an invalid project id", () => {
+      describe("When called with an invalid crypto id", () => {
         test("Then it should not dispatch the delete action", async () => {
           await act(async () => {
             await deleteCrypto("WrongId");
@@ -140,7 +140,7 @@ describe("Given a useCrypto hook", () => {
           });
         });
       });
-      describe("When it's invoked with getOneGameById with the correct id", () => {
+      describe("When it's invoked with getCryptoById with the correct id", () => {
         test("Then it should return a crypto with this id", async () => {
           const idCrypto = "43552lkjhfdkshgh45";
 
@@ -180,6 +180,64 @@ describe("Given a useCrypto hook", () => {
               position: toast.POSITION.TOP_CENTER,
             }
           );
+        });
+      });
+      describe("When invoke createCrypto function with a new crypto", () => {
+        test("Then it should call the succes modal", async () => {
+          const {
+            result: {
+              current: { createCrypto },
+            },
+          } = renderHook(useCrypto, { wrapper: Wrapper });
+
+          const mockCrypto = {
+            id: idCrypto,
+            title: "eflereum",
+            logo: "/eflereum.png",
+            description: "The revolution",
+            team: 15,
+            value: 3,
+            ICO: expect.any(Date),
+          };
+
+          await act(async () => {
+            await createCrypto(mockCrypto);
+          });
+
+          expect(toast.success).toHaveBeenCalledWith(
+            "Crypto created successfully!",
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
+          );
+        });
+      });
+
+      describe("When invoke a create crypto without correctly crypto", () => {
+        test("Then it should call the error modal", async () => {
+          const {
+            result: {
+              current: { createCrypto },
+            },
+          } = renderHook(useCrypto, { wrapper: Wrapper });
+
+          const mockCrypto = {
+            id: "",
+            title: "",
+            logo: "",
+            description: "",
+            team: 0,
+            value: 0,
+            ICO: expect.any(Date),
+          };
+
+          await act(async () => {
+            await createCrypto(mockCrypto);
+          });
+
+          expect(toast.error).toHaveBeenCalledWith("Cannot create the crypto", {
+            position: toast.POSITION.TOP_CENTER,
+          });
         });
       });
     });
