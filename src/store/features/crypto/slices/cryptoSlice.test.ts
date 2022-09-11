@@ -4,6 +4,7 @@ import cryptoSlice, {
   deleteCryptoActionCreator,
   loadAllCryptoActionCreator,
   createCryptoActionCreator,
+  modifyCryptoActionCreator,
 } from "./cryptoSlice";
 
 describe("Given a crypto slice", () => {
@@ -110,6 +111,69 @@ describe("Given a deleteCryptoActionCreator function", () => {
       const result = cryptoReducer(initialState, actionFake);
 
       expect(result).toStrictEqual(expectedResult);
+    });
+  });
+  describe("When called with a modifyWish action with a crypto that exists in the state", () => {
+    test("Then it should return an updated state", () => {
+      const initialCryptoFake: ICrypto[] = [
+        {
+          id: "4321",
+          title: "Cocoin",
+          logo: "/crypto.png",
+          description: "a great crypto",
+          team: 2,
+          value: 3,
+          ICO: new Date(),
+        },
+      ];
+
+      const modifiedCrypto: ICrypto = {
+        id: "4321",
+        title: "Flycoin",
+        logo: "/crypto.png",
+        description: "a great crypto",
+        team: 2,
+        value: 3,
+        ICO: new Date(),
+      };
+
+      const actionFake = modifyCryptoActionCreator(modifiedCrypto);
+
+      const result = cryptoReducer(initialCryptoFake, actionFake);
+
+      expect(result).toStrictEqual([modifiedCrypto]);
+    });
+  });
+
+  describe("When called with a modifyCrypto action with a crypto that does not exist in the state", () => {
+    test("Then it should return a crypto with the same state", () => {
+      const initialCryptoFake: ICrypto[] = [
+        {
+          id: "4322",
+          title: "Cocoin",
+          logo: "/crypto.png",
+          description: "a great crypto",
+          team: 2,
+          value: 3,
+          ICO: new Date(),
+        },
+      ];
+
+      const modifiedCrypto: ICrypto = {
+        id: "4321",
+        title: "Flycoin",
+        logo: "/crypto.png",
+        description: "a great crypto",
+        team: 2,
+        value: 3,
+        ICO: new Date(),
+      };
+
+      const actionFake = modifyCryptoActionCreator(modifiedCrypto);
+
+      const result = cryptoReducer(initialCryptoFake, actionFake);
+
+      expect(result).toStrictEqual(initialCryptoFake);
     });
   });
 });
