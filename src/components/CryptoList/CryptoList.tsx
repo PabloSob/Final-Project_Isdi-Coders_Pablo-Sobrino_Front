@@ -8,6 +8,7 @@ import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { ButtonStyled } from "../Button/ButtonStyled";
 import useUser from "../../hooks/useUser/useUser";
+import { ToastContainer } from "react-toastify";
 
 const CryptoList = (): JSX.Element => {
   const { getAllCrypto } = useCrypto();
@@ -25,8 +26,13 @@ const CryptoList = (): JSX.Element => {
     navigate("/login");
   };
 
+  const createCrypto = () => {
+    navigate("/create");
+  };
+
   return (
     <>
+      <ToastContainer />
       <CryptoListStyled>
         <section className="logo__container">
           <h1>
@@ -57,16 +63,16 @@ const CryptoList = (): JSX.Element => {
             />
             <Button
               buttonText="Create"
-              type="submit"
+              type="button"
               classNameTypeButton="button--big"
-              actionOnclick={() => {}}
+              actionOnclick={createCrypto}
               isDisable={isDisabled}
             />
           </div>
         </div>
         <ul className="crypto-list">
           {cryptoList.map((crypto) => (
-            <li key={crypto.title}>
+            <li key={crypto.id}>
               <CryptoCard crypto={crypto} />
             </li>
           ))}
