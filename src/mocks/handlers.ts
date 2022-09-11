@@ -162,4 +162,31 @@ export const handlers = [
       );
     }
   ),
+  rest.put(
+    `${process.env.REACT_APP_API_URL}crypto/${idCrypto}`,
+    async (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          id: idCrypto,
+          title: "Faracoin",
+          logo: "/fara.png",
+          description: "A fresh metaverse project",
+          team: 10,
+          value: 11,
+          ICO: "2022-09-07T19:12:29.422Z",
+        })
+      );
+    }
+  ),
+
+  rest.put(
+    `${process.env.REACT_APP_API_URL}crypto/wrongId`,
+    async (req, res, ctx) => {
+      return res(
+        ctx.status(400),
+        ctx.json({ error: "Error to modify crypto" })
+      );
+    }
+  ),
 ];
