@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -39,6 +39,46 @@ describe("Given a CryptoList component", () => {
       expect(buttonValue).toBeInTheDocument();
     });
   });
+  describe("When click on the Value button", () => {
+    test("Then it should call the createCrypto function", async () => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CryptoList />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const buttonValue = screen.getByRole("button", {
+        name: "Value",
+      });
+
+      await userEvent.click(buttonValue);
+    });
+  });
+
+  describe("When click on the Create button", () => {
+    test("Then it should call the createCrypto function", async () => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CryptoList />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const buttonCreate = screen.getByRole("button", {
+        name: "Create",
+      });
+
+      await userEvent.click(buttonCreate);
+
+      await waitFor(() => {
+        expect(mockNavigate).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe("When click on Logout button", () => {
     test("Then it should call the Logout function", async () => {
       render(
@@ -48,7 +88,6 @@ describe("Given a CryptoList component", () => {
           </BrowserRouter>
         </Provider>
       );
-
       const buttonLogout = screen.getByText("Logout");
 
       await userEvent.click(buttonLogout);
