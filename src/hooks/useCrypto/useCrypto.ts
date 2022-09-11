@@ -5,9 +5,10 @@ import {
   createCryptoActionCreator,
   deleteCryptoActionCreator,
   loadAllCryptoActionCreator,
+  modifyCryptoActionCreator,
 } from "../../store/features/crypto/slices/cryptoSlice";
 import { useAppDispatch } from "../../store/hooks";
-import { NewOrModifyCrypto } from "../../store/interfaces/cryptoInterfaces";
+import { NewCrypto } from "../../store/interfaces/cryptoInterfaces";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -84,13 +85,13 @@ const useCrypto = () => {
   }, []);
 
   const createCrypto = useCallback(
-    async (newCrypto: NewOrModifyCrypto) => {
+    async (newCrypto: NewCrypto) => {
       const token = localStorage.getItem("token");
       const createURL = `${apiURL}crypto/`;
 
       try {
         const {
-          data: { newCrypto: cryptoCreated },
+          data: { cryptoCreated },
         } = await axios.post(`${createURL}`, newCrypto, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -107,11 +108,34 @@ const useCrypto = () => {
     [dispatch]
   );
 
-  toast.dismiss();
+  const modifyCrypto = useCallback(
+    async (id: string, crypto: NewCrypto) => {
+      const token = localStorage.getItem("token");
+      const modifyURL = `${apiURL}crypto/`;
+
+      try {
+        const {
+          data: { modifiedCrypto },
+        } = await axios.put(`${modifyURL}${id}`, crypto, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        dispatch(modifyCryptoActionCreator(modifiedCrypto));
+        successModal("Crypto modified successfully!");
+      } catch (error) {
+        errorModal("Cannot modify the crypto");
+      }
+    },
+    [dispatch]
+  );
+
   return {
     getAllCrypto,
     getCryptoById,
     createCrypto,
+    modifyCrypto,
     deleteCrypto,
   };
 };
