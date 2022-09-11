@@ -3,9 +3,8 @@ import userEvent from "@testing-library/user-event";
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { NewOrModifyCrypto } from "../../store/interfaces/cryptoInterfaces";
 import { store } from "../../store/store";
-import CryptoForm from "./CryptoForm";
+import CryptoFormCreate from "./CryptoFormCreate";
 
 beforeEach(() => jest.restoreAllMocks());
 
@@ -23,27 +22,18 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("Given a CryptoForm component", () => {
-  const initialState: NewOrModifyCrypto = {
-    id: "",
-    title: "",
-    logo: "",
-    description: "",
-    team: 0,
-    value: 0,
-    ICO: new Date(),
-  };
   describe("When instantiated", () => {
     test("Then it should display a form with a title, six inputs and a button", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <CryptoForm initialState={initialState} />
+            <CryptoFormCreate />
           </BrowserRouter>
         </Provider>
       );
 
       const elementsInScreen = [
-        screen.getByText("Create your Project!"),
+        screen.getByText("Create your project!"),
         screen.getByPlaceholderText("Enter title"),
         screen.getByPlaceholderText("Enter a description"),
         screen.getByPlaceholderText("Number"),
@@ -70,7 +60,7 @@ describe("Given a CryptoForm component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <CryptoForm initialState={initialState} />
+            <CryptoFormCreate />
           </BrowserRouter>
         </Provider>
       );
@@ -106,7 +96,7 @@ describe("Given a CryptoForm component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <CryptoForm initialState={initialState} />
+            <CryptoFormCreate />
           </BrowserRouter>
         </Provider>
       );
@@ -130,7 +120,7 @@ describe("Given a CryptoForm component", () => {
 
       render(
         <Provider store={store}>
-          <CryptoForm initialState={initialState} />
+          <CryptoFormCreate />
         </Provider>
       );
 

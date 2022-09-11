@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const CryptoFormStyled = styled.div`
+const CryptoFormCreateStyled = styled.div`
   padding: 0;
   margin: 15px;
   flex-direction: column;
   align-items: center;
   display: flex;
   margin-bottom: 0px;
-  .crypto-form {
+  .crypto-form-create {
     width: 100%;
   }
   .logo {
@@ -41,7 +41,7 @@ const CryptoFormStyled = styled.div`
       font-size: 30px;
     }
   }
-  .crypto-form__container {
+  .crypto-form-create__container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -50,18 +50,18 @@ const CryptoFormStyled = styled.div`
     padding: 10px;
     border-radius: 8px;
   }
-  .crypto-form__name-logo {
+  .crypto-form-create__name-logo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
-  .crypto-form__description-title {
+  .crypto-form-create__description-title {
     color: ${(props) => props.theme.textThirdColor};
     font-size: 1.5rem;
     font-weight: bold;
     margin-top: 15px;
   }
-  .crypto-form__description {
+  .crypto-form-create__description {
     width: 100%;
     border-radius: 8px;
     background-color: ${(props) => props.theme.textFirstColor};
@@ -72,7 +72,7 @@ const CryptoFormStyled = styled.div`
     margin-top: 15px;
     font-size: 1.5rem;
   }
-  .crypto-form__team-amount {
+  .crypto-form-create__team-amount {
     width: 100%;
     height: 3.5rem;
     border-radius: 8px;
@@ -83,7 +83,7 @@ const CryptoFormStyled = styled.div`
     display: flex;
     margin-top: 15px;
   }
-  .crypto-form__value-amount {
+  .crypto-form-create__value-amount {
     width: 100%;
     height: 3.5rem;
     border-radius: 8px;
@@ -94,7 +94,7 @@ const CryptoFormStyled = styled.div`
     display: flex;
     margin-top: 15px;
   }
-  .crypto-form__ico-date {
+  .crypto-form-create__ico-date {
     width: 100%;
     height: 3.5rem;
     border-radius: 8px;
@@ -105,43 +105,43 @@ const CryptoFormStyled = styled.div`
     display: flex;
     margin-top: 15px;
   }
-  .crypto-form__team-title {
+  .crypto-form-create__team-title {
     color: ${(props) => props.theme.textThirdColor};
     font-weight: bold;
   }
-  .crypto-form__value-title {
+  .crypto-form-create__value-title {
     color: ${(props) => props.theme.textThirdColor};
     font-weight: bold;
   }
-  .crypto-form__ico-title {
+  .crypto-form-create__ico-title {
     color: ${(props) => props.theme.textThirdColor};
     font-weight: bold;
   }
-  .crypto-form__description-container {
+  .crypto-form-create__description-container {
     display: flex;
     flex-direction: column;
   }
-  .crypto-form__team-value__container {
+  .crypto-form-create__team-value__container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 5px;
   }
-  .crypto-form__team {
+  .crypto-form-create__team {
     display: flex;
     flex-direction: column;
     width: 50%;
   }
-  .crypto-form__value {
+  .crypto-form-create__value {
     display: flex;
     flex-direction: column;
     width: 50%;
   }
-  .crypto-form__ico {
+  .crypto-form-create__ico {
     display: flex;
     flex-direction: column;
   }
-  .crypto-form__project-logo {
+  .crypto-form-create__project-logo {
     object-fit: contain;
   }
   .link {
@@ -155,7 +155,7 @@ const CryptoFormStyled = styled.div`
     margin-top: 15px;
     padding-left: 0;
   }
-  .crypto-form {
+  .crypto-form-create {
     &__title {
       align-self: flex-start;
       display: flex;
@@ -163,16 +163,16 @@ const CryptoFormStyled = styled.div`
       font-size: 30px;
     }
   }
-  .crypto-form__icons {
+  .crypto-form-create__icons {
     margin-top: 15px;
     font-size: 1.5rem;
   }
-  .crypto-form__name-value {
+  .crypto-form-create__name-value {
     color: ${(props) => props.theme.textThirdColor};
     font-weight: bold;
     margin-left: 5px;
   }
-  .crypto-form__name-logo {
+  .crypto-form-create__name-logo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -180,7 +180,7 @@ const CryptoFormStyled = styled.div`
     align-items: center;
     margin-bottom: 1rem;
   }
-  .crypto-form__project-name {
+  .crypto-form-create__project-name {
     height: 3rem;
     border-radius: 8px;
     font-size: 1.5rem;
@@ -189,7 +189,7 @@ const CryptoFormStyled = styled.div`
     border: 1px solid;
   }
 
-  .crypto-form__ico-title {
+  .crypto-form-create__ico-title {
     color: ${(props) => props.theme.textThirdColor};
     font-weight: bold;
     margin-top: 15px;
@@ -201,18 +201,18 @@ const CryptoFormStyled = styled.div`
     width: 50%;
     align-self: flex-start;
   }
-  .crypto-form__team-amount {
+  .crypto-form-create__team-amount {
     font-size: 1.5rem;
   }
-  .crypto-form__value-amount {
+  .crypto-form-create__value-amount {
     font-size: 1.5rem;
   }
-  .crypto-form__ico-date {
+  .crypto-form-create__ico-date {
     font-size: 1rem;
   }
-  .crypto-form__ico {
+  .crypto-form-create__ico {
     width: 49%;
   }
 `;
 
-export default CryptoFormStyled;
+export default CryptoFormCreateStyled;

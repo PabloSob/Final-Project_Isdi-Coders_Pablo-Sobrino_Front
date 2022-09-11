@@ -7,18 +7,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCrypto from "../../hooks/useCrypto/useCrypto";
-import { NewOrModifyCrypto } from "../../store/interfaces/cryptoInterfaces";
+
 import Button from "../Button/Button";
 import { ButtonStyled } from "../Button/ButtonStyled";
-import CryptoFormStyled from "./CryptoFormStyled";
+import CryptoFormStyled from "./CryptoFormCreateStyled";
 
-interface CryptoFormProps {
-  initialState: NewOrModifyCrypto;
-}
+const initialState = {
+  title: "",
+  logo: "",
+  description: "",
+  team: 0,
+  value: 0,
+  ICO: new Date(),
+};
 
 let formData = new FormData();
 
-const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
+const CryptoFormCreate = (): JSX.Element => {
   const { createCrypto } = useCrypto();
   const [newCrypto, setNewCrypto] = useState(initialState);
 
@@ -31,11 +36,8 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    if (initialState.id) {
-    } else {
-      await createCrypto(newCrypto);
-      navigate("/crypto");
-    }
+    await createCrypto(newCrypto);
+    navigate("/crypto");
   };
 
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,20 +70,18 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
           </h1>
           <span className="logo__text">Crypto Realm</span>
         </section>
-        <h2 className="crypto-form__title">
-          {newCrypto.id ? "Update your project!" : "Create your Project!"}
-        </h2>
+        <h2 className="crypto-form-create__title">{"Create your project!"}</h2>
         <form
           action=""
           onSubmit={onSubmitData}
-          className="crypto-form"
+          className="crypto-form-create"
           noValidate
-          data-testid="crypto-form"
+          data-testid="crypto-form-create"
         >
-          <div className="crypto-form__container">
-            <section className="crypto-form__name-logo">
+          <div className="crypto-form-create__container">
+            <section className="crypto-form-create__name-logo">
               <input
-                className="crypto-form__project-name"
+                className="crypto-form-create__project-name"
                 placeholder="  Enter title"
                 onChange={onChangeData}
                 value={newCrypto.title}
@@ -91,7 +91,7 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
                 required
               />
               <input
-                className="crypto-form__project-logo"
+                className="crypto-form-create__project-logo"
                 placeholder="logo"
                 onChange={onChangeFile}
                 value={newCrypto.logo}
@@ -101,15 +101,15 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
                 required
               />
             </section>
-            <section className="crypto-form__description-container">
+            <section className="crypto-form-create__description-container">
               <label
                 htmlFor="description"
-                className="crypto-form__description-title"
+                className="crypto-form-create__description-title"
               >
                 Description
               </label>
               <input
-                className="crypto-form__description"
+                className="crypto-form-create__description"
                 placeholder="Enter a description"
                 onChange={onChangeData}
                 value={newCrypto.description}
@@ -119,14 +119,14 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
                 required
               />
             </section>
-            <section className="crypto-form__team-value__container">
-              <div className="crypto-form__team">
-                <label htmlFor="team" className="crypto-form__icons">
+            <section className="crypto-form-create__team-value__container">
+              <div className="crypto-form-create__team">
+                <label htmlFor="team" className="crypto-form-create__icons">
                   <FontAwesomeIcon icon={faPeopleGroup} />
-                  <span className="crypto-form__name-value">Team</span>
+                  <span className="crypto-form-create__name-value">Team</span>
                 </label>
                 <input
-                  className="crypto-form__team-amount"
+                  className="crypto-form-create__team-amount"
                   placeholder="Number"
                   onChange={onChangeData}
                   value={newCrypto.team}
@@ -136,13 +136,13 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
                   required
                 ></input>
               </div>
-              <div className="crypto-form__value">
-                <label htmlFor="Value" className="crypto-form__icons">
+              <div className="crypto-form-create__value">
+                <label htmlFor="Value" className="crypto-form-create__icons">
                   <FontAwesomeIcon icon={faDollarSign} />
-                  <span className="crypto-form__name-value">Value</span>
+                  <span className="crypto-form-create__name-value">Value</span>
                 </label>
                 <input
-                  className="crypto-form__value-amount"
+                  className="crypto-form-create__value-amount"
                   placeholder="Value"
                   onChange={onChangeData}
                   value={newCrypto.value}
@@ -153,13 +153,13 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
                 />
               </div>
             </section>
-            <div className="crypto-form__ico">
-              <label htmlFor="date" className="crypto-form__icons">
+            <div className="crypto-form-create__ico">
+              <label htmlFor="date" className="crypto-form-create__icons">
                 <FontAwesomeIcon icon={faCalendar} />
-                <span className="crypto-form__ico-title">ICO</span>
+                <span className="crypto-form-create__ico-title">ICO</span>
               </label>
               <input
-                className="crypto-form__ico-date"
+                className="crypto-form-create__ico-date"
                 placeholder="Enter ICO"
                 onChange={onChangeDate}
                 value={date}
@@ -172,7 +172,7 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
             </div>
           </div>
           <Button
-            buttonText={newCrypto.id ? "Modify" : "Create"}
+            buttonText={"Create"}
             type="submit"
             classNameTypeButton="button--big"
             actionOnclick={() => {}}
@@ -193,4 +193,4 @@ const CryptoForm = ({ initialState }: CryptoFormProps): JSX.Element => {
   );
 };
 
-export default CryptoForm;
+export default CryptoFormCreate;

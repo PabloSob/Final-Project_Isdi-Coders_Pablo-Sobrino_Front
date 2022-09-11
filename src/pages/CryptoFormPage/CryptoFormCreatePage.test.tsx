@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../store/store";
-import CryptoFormPage from "./CryptoFormPage";
+import CryptoFormCreatePage from "./CryptoFormCreatePage";
 
 const mockUseParams = jest.fn();
 const mockUseAppSelector = jest.fn();
@@ -26,7 +26,7 @@ describe("Given a CryptoFormPage component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <CryptoFormPage />
+            <CryptoFormCreatePage />
           </BrowserRouter>
         </Provider>
       );
