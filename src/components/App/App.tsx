@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import CryptoFormCreatePage from "../../pages/CryptoFormPage/CryptoFormCreatePage";
 import CryptoListPage from "../../pages/CryptoListPage/CryptoListPage";
 import DetailPage from "../../pages/DetailPage/DetailPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -37,9 +38,33 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/crypto" element={<CryptoListPage />} />
+
+        <Route
+          path="/crypto"
+          element={
+            <>
+              <CryptoListPage />
+            </>
+          }
+        />
         <Route path="/crypto/details/:id" element={<DetailPage />} />
         <Route path="/*" element={<NotFoundPage />} />
+        <Route
+          path="/create"
+          element={
+            <>
+              <CryptoFormCreatePage />
+            </>
+          }
+        />
+        <Route
+          path="/modify/:id"
+          element={
+            <>
+              <CryptoFormCreatePage />
+            </>
+          }
+        />
       </Routes>
     </ThemeProvider>
   );
