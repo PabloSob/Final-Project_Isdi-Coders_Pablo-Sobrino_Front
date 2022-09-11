@@ -17,6 +17,11 @@ const cryptoSlice = createSlice({
       ...previousCrypto,
       action.payload,
     ],
+    modifyCrypto: (previousState, action: PayloadAction<ICrypto>) => {
+      return previousState.map((crypto) =>
+        crypto.id === action.payload.id ? action.payload : crypto
+      );
+    },
   },
 });
 
@@ -26,6 +31,7 @@ export const {
   loadAllCrypto: loadAllCryptoActionCreator,
   deleteCrypto: deleteCryptoActionCreator,
   createCrypto: createCryptoActionCreator,
+  modifyCrypto: modifyCryptoActionCreator,
 } = cryptoSlice.actions;
 
 export default cryptoSlice.reducer;
