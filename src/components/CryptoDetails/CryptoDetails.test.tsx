@@ -39,6 +39,23 @@ describe("Given a CryptoDetails component", () => {
       expect(buttonFake).toBeInTheDocument();
     });
   });
+  describe("When click on the Value button", () => {
+    test("Then it should call the createCrypto function", async () => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CryptoDetails key={crypto.title} crypto={crypto} />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const buttonModify = screen.getByRole("button", {
+        name: "Modify",
+      });
+
+      await userEvent.click(buttonModify);
+    });
+  });
 
   describe("When click on the button link", () => {
     test("Then the navigate function will be called", async () => {

@@ -7,7 +7,7 @@ import {
   loadAllCryptoActionCreator,
 } from "../../store/features/crypto/slices/cryptoSlice";
 import { useAppDispatch } from "../../store/hooks";
-import { ICrypto } from "../../store/interfaces/cryptoInterfaces";
+import { NewOrModifyCrypto } from "../../store/interfaces/cryptoInterfaces";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -84,13 +84,13 @@ const useCrypto = () => {
   }, []);
 
   const createCrypto = useCallback(
-    async (newCrypto: ICrypto) => {
+    async (newCrypto: NewOrModifyCrypto) => {
       const token = localStorage.getItem("token");
       const createURL = `${apiURL}crypto/`;
 
       try {
         const {
-          data: { cryptoCreated },
+          data: { newCrypto: cryptoCreated },
         } = await axios.post(`${createURL}`, newCrypto, {
           headers: {
             Authorization: `Bearer ${token}`,
