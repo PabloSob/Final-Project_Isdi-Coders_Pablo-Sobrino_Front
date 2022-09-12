@@ -14,6 +14,8 @@ interface CryptoDetailProps {
   crypto: ICrypto;
 }
 
+const urlBack = process.env.REACT_APP_API_URL;
+
 const CryptoDetails = ({ crypto }: CryptoDetailProps): JSX.Element => {
   let isDisable = false;
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const CryptoDetails = ({ crypto }: CryptoDetailProps): JSX.Element => {
             <div className="crypto-details__project-name">{crypto.title}</div>
             <img
               className="crypto-details__project-logo"
-              src={crypto.logo}
+              src={`${urlBack}${crypto.logo}`}
               alt="crypto-project logo"
               height={"40px"}
               width={"40px"}
