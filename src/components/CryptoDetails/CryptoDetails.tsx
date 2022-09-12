@@ -14,11 +14,14 @@ interface CryptoDetailProps {
   crypto: ICrypto;
 }
 
-const urlBack = process.env.REACT_APP_API_URL;
-
 const CryptoDetails = ({ crypto }: CryptoDetailProps): JSX.Element => {
   let isDisable = false;
   const navigate = useNavigate();
+
+  const navigateToCryptoToModify = async () => {
+    navigate(`/modify/${crypto.id}`);
+  };
+
   const objectLimitDate = new Date(crypto.ICO);
 
   const ICO = `${objectLimitDate.getDate()}/${
@@ -44,7 +47,7 @@ const CryptoDetails = ({ crypto }: CryptoDetailProps): JSX.Element => {
             <div className="crypto-details__project-name">{crypto.title}</div>
             <img
               className="crypto-details__project-logo"
-              src={`${urlBack}${crypto.logo}`}
+              src={crypto.imageBackUp}
               alt="crypto-project logo"
               height={"40px"}
               width={"40px"}
@@ -86,7 +89,7 @@ const CryptoDetails = ({ crypto }: CryptoDetailProps): JSX.Element => {
           buttonText="Modify"
           type="submit"
           classNameTypeButton="button--big"
-          actionOnclick={() => {}}
+          actionOnclick={navigateToCryptoToModify}
           isDisable={isDisable}
         />
         <ButtonStyled

@@ -4,39 +4,42 @@ import {
   faPeopleGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { SyntheticEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import useCrypto from "../../hooks/useCrypto/useCrypto";
+import { NewCrypto } from "../../store/interfaces/cryptoInterfaces";
 
 import Button from "../Button/Button";
 import { ButtonStyled } from "../Button/ButtonStyled";
 import CryptoFormModifyStyled from "./CryptoFormModifyStyled";
 
-const initialState = {
-  title: "",
-  logo: "",
-  description: "",
-  team: 0,
-  value: 0,
-  ICO: new Date(),
-};
-
 let formData = new FormData();
 
-const CryptoFormModify = (): JSX.Element => {
-  const { createCrypto } = useCrypto();
-  const [newCrypto, setNewCrypto] = useState(initialState);
+interface CryptoFormModifyProps {
+  crypto: NewCrypto;
+}
 
+const CryptoFormModify = ({ crypto }: CryptoFormModifyProps): JSX.Element => {
+  const { modifyCrypto } = useCrypto();
+  const [cryptoEdit, setCryptoEdit] = useState(crypto);
+
+  useEffect(() => {
+    setCryptoEdit({ ...crypto, ICO: new Date(crypto.ICO), logo: "" });
+  }, [crypto]);
+
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewCrypto({ ...newCrypto, [event.target.id]: event.target.value });
+    setCryptoEdit({ ...cryptoEdit, [event.target.id]: event.target.value });
   };
 
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    await createCrypto(formData);
+    formData.append("crypto", JSON.stringify({ ...cryptoEdit }));
+
+    await modifyCrypto(formData, id!);
     navigate("/crypto");
   };
 
@@ -48,13 +51,13 @@ const CryptoFormModify = (): JSX.Element => {
   const [date, setDate] = useState("");
   const onChangeDate = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDate(event.target.value);
-    setNewCrypto({ ...newCrypto, ICO: new Date(event.target.value) });
+    setCryptoEdit({ ...cryptoEdit, ICO: new Date(event.target.value) });
   };
 
   const hasOneEmptyField =
-    newCrypto.title.length < 1 ||
-    newCrypto.ICO.toDateString().length < 1 ||
-    newCrypto.description.length < 1;
+    cryptoEdit.title.length < 1 ||
+    cryptoEdit.ICO.toDateString().length < 1 ||
+    cryptoEdit.description.length < 1;
 
   return (
     <>
@@ -84,7 +87,7 @@ const CryptoFormModify = (): JSX.Element => {
                 className="crypto-form-modify__project-name"
                 placeholder="  Enter title"
                 onChange={onChangeData}
-                value={newCrypto.title}
+                value={cryptoEdit.title}
                 type="text"
                 id="title"
                 autoComplete="off"
@@ -94,7 +97,7 @@ const CryptoFormModify = (): JSX.Element => {
                 className="crypto-form-modify__project-logo"
                 placeholder="logo"
                 onChange={onChangeFile}
-                value={newCrypto.logo}
+                value={cryptoEdit.logo}
                 type="file"
                 id="logo"
                 autoComplete="off"
@@ -112,7 +115,7 @@ const CryptoFormModify = (): JSX.Element => {
                 className="crypto-form-modify__description"
                 placeholder="Enter a description"
                 onChange={onChangeData}
-                value={newCrypto.description}
+                value={cryptoEdit.description}
                 type="text"
                 id="description"
                 autoComplete="off"
@@ -129,7 +132,7 @@ const CryptoFormModify = (): JSX.Element => {
                   className="crypto-form-modify__team-amount"
                   placeholder="Number"
                   onChange={onChangeData}
-                  value={newCrypto.team}
+                  value={cryptoEdit.team}
                   type="number"
                   id="team"
                   autoComplete="off"
@@ -145,7 +148,7 @@ const CryptoFormModify = (): JSX.Element => {
                   className="crypto-form-modify__value-amount"
                   placeholder="Value"
                   onChange={onChangeData}
-                  value={newCrypto.value}
+                  value={cryptoEdit.value}
                   type="number"
                   id="value"
                   autoComplete="off"
@@ -180,7 +183,7 @@ const CryptoFormModify = (): JSX.Element => {
           />
           <ButtonStyled
             onClick={() => {
-              navigate(`/crypto`);
+              navigate("/crypto");
             }}
             className="link"
             id="link"
