@@ -1,4 +1,4 @@
-import CryptoFormCreate from "../../components/CryptoForm/CryptoFormCreate";
+import CryptoFormCreate from "../../components/CryptoFormCreate/CryptoFormCreate";
 
 const CryptoFormCreatePage = (): JSX.Element => {
   return <CryptoFormCreate />;
