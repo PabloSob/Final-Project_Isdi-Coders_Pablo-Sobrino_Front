@@ -101,7 +101,6 @@ const CryptoFormModify = ({ crypto }: CryptoFormModifyProps): JSX.Element => {
                 type="file"
                 id="logo"
                 autoComplete="off"
-                required
               />
             </section>
             <section className="crypto-form-modify__description-container">
@@ -169,7 +168,6 @@ const CryptoFormModify = ({ crypto }: CryptoFormModifyProps): JSX.Element => {
                 type="date"
                 id="ICO"
                 autoComplete="off"
-                required
               />
               <></>
             </div>

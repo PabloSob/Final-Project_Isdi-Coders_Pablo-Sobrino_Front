@@ -184,8 +184,8 @@ const CryptoFormModifyStyled = styled.div`
     height: 3rem;
     border-radius: 8px;
     font-size: 1.5rem;
-    object-fit: contain;
-    width: 10rem;
+    padding-left: 1rem;
+    width: 12rem;
     border: 1px solid;
   }
 
