@@ -114,6 +114,8 @@ const useCrypto = () => {
       const modifyURL = `${apiURL}crypto/`;
 
       try {
+        loadingModal("Please wait");
+
         const {
           data: { modifiedCrypto },
         } = await axios.put(`${modifyURL}${id}`, crypto, {

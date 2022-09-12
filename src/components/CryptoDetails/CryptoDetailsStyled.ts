@@ -51,7 +51,12 @@ const CryptoDetailsStyled = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    .crypto-details__project-logo {
+      object-fit: contain;
+      border-radius: 20px;
+    }
   }
+
   .crypto-details__description-title {
     color: ${(props) => props.theme.textThirdColor};
     font-size: 1.5rem;
@@ -67,6 +72,7 @@ const CryptoDetailsStyled = styled.div`
     padding: 1rem;
     display: flex;
     margin-top: 15px;
+    font-size: 1.5rem;
   }
   .crypto-details__team-amount {
     width: 100%;
@@ -137,9 +143,7 @@ const CryptoDetailsStyled = styled.div`
     display: flex;
     flex-direction: column;
   }
-  .crypto-details__project-logo {
-    object-fit: contain;
-  }
+
   .link {
     border: none;
     font-size: 24px;

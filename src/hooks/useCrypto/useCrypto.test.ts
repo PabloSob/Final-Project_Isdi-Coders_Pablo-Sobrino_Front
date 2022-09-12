@@ -287,6 +287,24 @@ describe("Given a useCrypto hook", () => {
         });
       });
 
+      test("Then it should send a loading modal", async () => {
+        const {
+          result: {
+            current: { getAllCrypto },
+          },
+        } = renderHook(useCrypto, { wrapper: Wrapper });
+
+        await act(async () => {
+          await getAllCrypto();
+        });
+
+        await waitFor(() => {
+          expect(toast.loading).toHaveBeenCalledWith("Please wait", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        });
+      });
+
       describe("When invoked a modifyCrypto without a correctly id", () => {
         test("Then it should call the error modal", async () => {
           const crypto = new FormData();

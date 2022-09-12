@@ -8,28 +8,36 @@ const CryptoCardStyled = styled.div`
   background-color: ${(props) => props.theme.backgroundShadow};
   padding: 10px;
   border-radius: 8px;
-
-  .crypto-card__top-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    img {
-      object-fit: contain;
+  .crypto-card {
+    &__top-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      img {
+        object-fit: contain;
+      }
+    }
+    &__title {
+      font-size: 2rem;
+    }
+    &__logo {
+      border-radius: 20px;
+    }
+    &__team-container {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+    }
+    &__bot-container {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      height: 80%;
     }
   }
-  .crypto-card__team-container {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-  }
-  .crypto-card__bot-container {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    height: 80%;
-  }
+
   .crypto-card__icons {
     font-size: 1.5rem;
   }
@@ -58,9 +66,6 @@ const CryptoCardStyled = styled.div`
   }
   h3 {
     margin: 0;
-  }
-  .crypto-card__title {
-    font-size: 2rem;
   }
 `;
 
