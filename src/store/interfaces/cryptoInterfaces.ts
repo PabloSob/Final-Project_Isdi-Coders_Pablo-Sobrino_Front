@@ -6,6 +6,7 @@ export interface ICrypto {
   value: number;
   ICO: Date;
   id: string;
+  imageBackUp?: string;
 }
 
 export interface NewCrypto {
@@ -15,6 +16,7 @@ export interface NewCrypto {
   team: number;
   value: number;
   ICO: Date;
+  imageBackUp?: string;
 }
 
 export type Crypto = ICrypto[];
