@@ -3,10 +3,9 @@ import styled from "styled-components";
 const ButtonStyled = styled.button`
   &.button-link {
     width: 100%;
-    display: grid;
+    text-decoration: none;
     place-items: center;
     color: ${(props) => props.theme.textThirdColor};
-    text-decoration: none;
     font-size: 20px;
     font-weight: bold;
     border: none;

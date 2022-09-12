@@ -8,7 +8,6 @@ import {
   modifyCryptoActionCreator,
 } from "../../store/features/crypto/slices/cryptoSlice";
 import { useAppDispatch } from "../../store/hooks";
-import { ICrypto } from "../../store/interfaces/cryptoInterfaces";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -110,7 +109,7 @@ const useCrypto = () => {
   );
 
   const modifyCrypto = useCallback(
-    async (id: string, crypto: ICrypto) => {
+    async (crypto: FormData, id: string) => {
       const token = localStorage.getItem("token");
       const modifyURL = `${apiURL}crypto/`;
 
