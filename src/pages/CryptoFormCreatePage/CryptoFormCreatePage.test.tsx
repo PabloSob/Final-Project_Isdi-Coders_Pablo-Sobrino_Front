@@ -17,7 +17,7 @@ jest.mock("../../store/hooks", () => ({
   useAppSelector: () => mockUseAppSelector(),
 }));
 
-describe("Given a CryptoFormPage component", () => {
+describe("Given a CryptoFormCreatePage component", () => {
   describe("When not receives an id", () => {
     test("Then it should render the created component", () => {
       mockUseParams.mockReturnValue({ id: undefined });
