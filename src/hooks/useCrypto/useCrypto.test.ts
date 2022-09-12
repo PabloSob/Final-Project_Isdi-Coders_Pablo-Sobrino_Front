@@ -95,6 +95,7 @@ describe("Given a useCrypto hook", () => {
         delete axios.defaults.headers.get["IsTestError"];
       });
     });
+
     describe("When invoke deleteCrypto function with a valid crypto id", () => {
       const {
         result: {
@@ -182,7 +183,7 @@ describe("Given a useCrypto hook", () => {
           );
         });
       });
-      describe("When invoke createCrypto function with a new formData", () => {
+      describe("When invoke createCrypto function with a formData", () => {
         test("Then it should call the succes modal", async () => {
           const crypto = new FormData();
           const {
@@ -192,7 +193,6 @@ describe("Given a useCrypto hook", () => {
           } = renderHook(useCrypto, { wrapper: Wrapper });
 
           const mockCrypto = {
-            id: idCrypto,
             title: "eflereum",
             logo: "/eflereum.png",
             description: "The revolution",
@@ -228,7 +228,6 @@ describe("Given a useCrypto hook", () => {
           } = renderHook(useCrypto, { wrapper: Wrapper });
 
           const mockCrypto = {
-            id: "",
             title: "",
             logo: "",
             description: "",
@@ -248,6 +247,60 @@ describe("Given a useCrypto hook", () => {
             position: toast.POSITION.TOP_CENTER,
           });
           delete axios.defaults.headers.post["IsTestError"];
+        });
+      });
+
+      describe("When invoked a modifyCrypto function with a formData", () => {
+        test("Then it should call the succes modal", async () => {
+          const crypto = new FormData();
+
+          const {
+            result: {
+              current: { modifyCrypto },
+            },
+          } = renderHook(useCrypto);
+
+          const idCrypto: string = "43552lkjhfdkshgh45";
+
+          const mockCrypto = {
+            title: "eflereum",
+            logo: "/eflereum.png",
+            description: "The revolution",
+            team: 15,
+            value: 3,
+            ICO: expect.any(Date),
+          };
+
+          crypto.append("crypto", JSON.stringify(mockCrypto));
+          crypto.append("logo", new File([], "logo.jng"));
+
+          await act(async () => {
+            await modifyCrypto(crypto, idCrypto);
+          });
+
+          expect(toast.success).toHaveBeenCalledWith(
+            "Crypto modified successfully!",
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
+          );
+        });
+      });
+
+      describe("When invoked a modifyCrypto without a correctly id", () => {
+        test("Then it should call the error modal", async () => {
+          const crypto = new FormData();
+          const {
+            result: {
+              current: { modifyCrypto },
+            },
+          } = renderHook(useCrypto, { wrapper: Wrapper });
+
+          await modifyCrypto(crypto, "wrongId");
+
+          expect(toast.error).toHaveBeenCalledWith("Cannot modify the crypto", {
+            position: toast.POSITION.TOP_CENTER,
+          });
         });
       });
     });

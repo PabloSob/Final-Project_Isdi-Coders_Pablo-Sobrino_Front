@@ -11,6 +11,9 @@ const LinkStyledLogin = styled.div`
     margin-bottom: 20px;
     margin-top: 15px;
   }
+  .button-link {
+    text-decoration: none;
+  }
 `;
 
 export default LinkStyledLogin;

@@ -21,7 +21,7 @@ const CryptoDetails = ({ crypto }: CryptoDetailProps): JSX.Element => {
   const navigate = useNavigate();
   const objectLimitDate = new Date(crypto.ICO);
 
-  const limitDate = `${objectLimitDate.getDate()}/${
+  const ICO = `${objectLimitDate.getDate()}/${
     objectLimitDate.getMonth() + 1
   }/${objectLimitDate.getFullYear()}`;
   return (
@@ -78,7 +78,7 @@ const CryptoDetails = ({ crypto }: CryptoDetailProps): JSX.Element => {
               <span className="crypto-details__ico-title">ICO</span>
             </span>
             <div className="crypto-details__ico-date">
-              <>{limitDate}</>
+              <>{ICO}</>
             </div>
           </div>
         </div>
