@@ -8,7 +8,7 @@ import {
   modifyCryptoActionCreator,
 } from "../../store/features/crypto/slices/cryptoSlice";
 import { useAppDispatch } from "../../store/hooks";
-import { NewCrypto } from "../../store/interfaces/cryptoInterfaces";
+import { ICrypto } from "../../store/interfaces/cryptoInterfaces";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -85,15 +85,16 @@ const useCrypto = () => {
   }, []);
 
   const createCrypto = useCallback(
-    async (newCrypto: NewCrypto) => {
+    async (formCryptoData: FormData) => {
       const token = localStorage.getItem("token");
       const createURL = `${apiURL}crypto/`;
 
       try {
         const {
           data: { cryptoCreated },
-        } = await axios.post(`${createURL}`, newCrypto, {
+        } = await axios.post(`${createURL}`, formCryptoData, {
           headers: {
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
         });
@@ -109,7 +110,7 @@ const useCrypto = () => {
   );
 
   const modifyCrypto = useCallback(
-    async (id: string, crypto: NewCrypto) => {
+    async (id: string, crypto: ICrypto) => {
       const token = localStorage.getItem("token");
       const modifyURL = `${apiURL}crypto/`;
 
@@ -118,6 +119,7 @@ const useCrypto = () => {
           data: { modifiedCrypto },
         } = await axios.put(`${modifyURL}${id}`, crypto, {
           headers: {
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
         });

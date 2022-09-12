@@ -6,7 +6,6 @@ import {
   deleteCryptoActionCreator,
   loadAllCryptoActionCreator,
 } from "../../store/features/crypto/slices/cryptoSlice";
-import { NewCrypto } from "../../store/interfaces/cryptoInterfaces";
 import Wrapper from "../../utils/Wrapper";
 import useCrypto from "./useCrypto";
 
@@ -183,8 +182,9 @@ describe("Given a useCrypto hook", () => {
           );
         });
       });
-      describe("When invoke createCrypto function with a new crypto", () => {
+      describe("When invoke createCrypto function with a new formData", () => {
         test("Then it should call the succes modal", async () => {
+          const crypto = new FormData();
           const {
             result: {
               current: { createCrypto },
@@ -201,8 +201,11 @@ describe("Given a useCrypto hook", () => {
             ICO: expect.any(Date),
           };
 
+          crypto.append("crypto", JSON.stringify(mockCrypto));
+          crypto.append("logo", new File([], "logo.jng"));
+
           await act(async () => {
-            await createCrypto(mockCrypto);
+            await createCrypto(crypto);
           });
 
           expect(toast.success).toHaveBeenCalledWith(
@@ -214,8 +217,10 @@ describe("Given a useCrypto hook", () => {
         });
       });
 
-      describe("When invoke a create crypto without correctly crypto", () => {
+      describe("When invoke a create crypto without correctly formData", () => {
         test("Then it should call the error modal", async () => {
+          axios.defaults.headers.post["IsTestError"] = true;
+          const crypto = new FormData();
           const {
             result: {
               current: { createCrypto },
@@ -232,69 +237,17 @@ describe("Given a useCrypto hook", () => {
             ICO: expect.any(Date),
           };
 
+          crypto.append("crypto", JSON.stringify(mockCrypto));
+          crypto.append("logo", new File([], "logo.jng"));
+
           await act(async () => {
-            await createCrypto(mockCrypto);
+            await createCrypto(crypto);
           });
 
           expect(toast.error).toHaveBeenCalledWith("Cannot create the crypto", {
             position: toast.POSITION.TOP_CENTER,
           });
-        });
-      });
-      describe("When invoke modifyCrypto function with an id and the crypto to modify", () => {
-        test("Then it should call the success modal", async () => {
-          const {
-            result: {
-              current: { modifyCrypto },
-            },
-          } = renderHook(useCrypto, { wrapper: Wrapper });
-
-          const mockCryptoModify: NewCrypto = {
-            title: "Faracoin",
-            logo: "/fara.png",
-            description: "A fresh metaverse project",
-            team: 10,
-            value: 11,
-            ICO: expect.any(Date),
-          };
-
-          await act(async () => {
-            await modifyCrypto(idCrypto, mockCryptoModify);
-          });
-
-          expect(toast.success).toHaveBeenCalledWith(
-            "Crypto modified successfully!",
-            {
-              position: toast.POSITION.TOP_CENTER,
-            }
-          );
-        });
-      });
-
-      describe("When it's invoked without id", () => {
-        test("Then it should call the error modal", async () => {
-          const {
-            result: {
-              current: { modifyCrypto },
-            },
-          } = renderHook(useCrypto, { wrapper: Wrapper });
-
-          const mockCryptoModify: NewCrypto = {
-            title: "Faracoin",
-            logo: "/fara.png",
-            description: "A fresh metaverse project",
-            team: 10,
-            value: 11,
-            ICO: expect.any(Date),
-          };
-
-          await act(async () => {
-            await modifyCrypto("wrongId", mockCryptoModify);
-          });
-
-          expect(toast.error).toHaveBeenCalledWith("Cannot modify the crypto", {
-            position: toast.POSITION.TOP_CENTER,
-          });
+          delete axios.defaults.headers.post["IsTestError"];
         });
       });
     });

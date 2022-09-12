@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../store/store";
-import CryptoFormCreatePage from "./CryptoFormCreatePage";
+import CryptoFormModifyPage from "./CryptoFormModifyPage";
 
 const mockUseParams = jest.fn();
 const mockUseAppSelector = jest.fn();
@@ -17,7 +17,7 @@ jest.mock("../../store/hooks", () => ({
   useAppSelector: () => mockUseAppSelector(),
 }));
 
-describe("Given a CryptoFormPage component", () => {
+describe("Given a CryptoFormModifyPage component", () => {
   describe("When not receives an id", () => {
     test("Then it should render the created component", () => {
       mockUseParams.mockReturnValue({ id: undefined });
@@ -26,12 +26,12 @@ describe("Given a CryptoFormPage component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <CryptoFormCreatePage />
+            <CryptoFormModifyPage />
           </BrowserRouter>
         </Provider>
       );
 
-      const expectedTextButton = "Create";
+      const expectedTextButton = "Modify";
       const button = screen.getByRole("button", {
         name: expectedTextButton,
       });

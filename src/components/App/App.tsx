@@ -7,7 +7,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import CryptoFormCreatePage from "../../pages/CryptoFormPage/CryptoFormCreatePage";
+import CryptoFormCreatePage from "../../pages/CryptoFormCreatePage/CryptoFormCreatePage";
+import CryptoFormModifyPage from "../../pages/CryptoFormModifyPage/CryptoFormModifyPage";
 import CryptoListPage from "../../pages/CryptoListPage/CryptoListPage";
 import DetailPage from "../../pages/DetailPage/DetailPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -61,7 +62,7 @@ function App() {
           path="/modify/:id"
           element={
             <>
-              <CryptoFormCreatePage />
+              <CryptoFormModifyPage />
             </>
           }
         />

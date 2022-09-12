@@ -138,8 +138,9 @@ export const handlers = [
   rest.post(
     `${process.env.REACT_APP_API_URL}crypto/`,
     async (req, res, ctx) => {
-      const body = await req.json();
-      if (!body.logo) {
+      const headerTestError = req.headers.get("IsTestError");
+
+      if (headerTestError) {
         return res(
           ctx.status(400),
           ctx.json({

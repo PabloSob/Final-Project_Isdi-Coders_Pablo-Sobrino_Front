@@ -10,6 +10,8 @@ interface CryptoCardProps {
   crypto: ICrypto;
 }
 
+const urlBack = process.env.REACT_APP_API_URL;
+
 const CryptoCard = ({
   crypto: { title, logo, team, value, id },
 }: CryptoCardProps): JSX.Element => {
@@ -28,7 +30,7 @@ const CryptoCard = ({
           <h3 className="crypto-card__title">{title}</h3>
           <img
             className="crypto-card__logo"
-            src={logo}
+            src={`${urlBack}${logo}`}
             alt={title}
             height={"40px"}
             width={"40px"}
