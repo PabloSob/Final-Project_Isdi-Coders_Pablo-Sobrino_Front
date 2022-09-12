@@ -7,39 +7,56 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCrypto from "../../hooks/useCrypto/useCrypto";
-
+import { NewCrypto } from "../../store/interfaces/cryptoInterfaces";
 import Button from "../Button/Button";
 import { ButtonStyled } from "../Button/ButtonStyled";
 import CryptoFormStyled from "./CryptoFormCreateStyled";
 
-const initialState = {
-  title: "",
-  logo: "",
-  description: "",
-  team: 0,
-  value: 0,
-  ICO: new Date(),
-};
-
 let formData = new FormData();
 
 const CryptoFormCreate = (): JSX.Element => {
+  const initialState: NewCrypto = {
+    title: "",
+    logo: "",
+    description: "",
+    team: 0,
+    value: 0,
+    ICO: new Date(),
+  };
+
   const { createCrypto } = useCrypto();
-  const [newCrypto, setNewCrypto] = useState(initialState);
+
+  const [formCryptoData, setFormCryptoData] = useState(initialState);
 
   const navigate = useNavigate();
 
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewCrypto({ ...newCrypto, [event.target.id]: event.target.value });
+    setFormCryptoData({
+      ...formCryptoData,
+      [event.target.id]: event.target.value,
+    });
   };
 
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    await createCrypto(newCrypto);
+    formData.append(
+      "crypto",
+      JSON.stringify({
+        title: formCryptoData.title,
+        description: formCryptoData.description,
+        team: formCryptoData.team,
+        value: formCryptoData.value,
+        ICO: formCryptoData.ICO,
+      })
+    );
+
+    await createCrypto(formData);
+
+    setFormCryptoData(initialState);
+    formData = new FormData();
     navigate("/crypto");
   };
-
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     formData.append("logo", event.target.files![0]);
     onChangeData(event);
@@ -48,13 +65,16 @@ const CryptoFormCreate = (): JSX.Element => {
   const [date, setDate] = useState("");
   const onChangeDate = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDate(event.target.value);
-    setNewCrypto({ ...newCrypto, ICO: new Date(event.target.value) });
+    setFormCryptoData({
+      ...formCryptoData,
+      ICO: new Date(event.target.value),
+    });
   };
 
   const hasOneEmptyField =
-    newCrypto.title.length < 1 ||
-    newCrypto.ICO.toDateString().length < 1 ||
-    newCrypto.description.length < 1;
+    formCryptoData.title.length < 1 ||
+    formCryptoData.ICO.toDateString().length < 1 ||
+    formCryptoData.description.length < 1;
 
   return (
     <>
@@ -70,7 +90,7 @@ const CryptoFormCreate = (): JSX.Element => {
           </h1>
           <span className="logo__text">Crypto Realm</span>
         </section>
-        <h2 className="crypto-form-create__title">{"Create your project!"}</h2>
+        <h2 className="crypto-form-create__title">Create your project!</h2>
         <form
           action=""
           onSubmit={onSubmitData}
@@ -84,7 +104,7 @@ const CryptoFormCreate = (): JSX.Element => {
                 className="crypto-form-create__project-name"
                 placeholder="  Enter title"
                 onChange={onChangeData}
-                value={newCrypto.title}
+                value={formCryptoData.title}
                 type="text"
                 id="title"
                 autoComplete="off"
@@ -94,7 +114,7 @@ const CryptoFormCreate = (): JSX.Element => {
                 className="crypto-form-create__project-logo"
                 placeholder="logo"
                 onChange={onChangeFile}
-                value={newCrypto.logo}
+                value={formCryptoData.logo}
                 type="file"
                 id="logo"
                 autoComplete="off"
@@ -112,7 +132,7 @@ const CryptoFormCreate = (): JSX.Element => {
                 className="crypto-form-create__description"
                 placeholder="Enter a description"
                 onChange={onChangeData}
-                value={newCrypto.description}
+                value={formCryptoData.description}
                 type="text"
                 id="description"
                 autoComplete="off"
@@ -129,7 +149,7 @@ const CryptoFormCreate = (): JSX.Element => {
                   className="crypto-form-create__team-amount"
                   placeholder="Number"
                   onChange={onChangeData}
-                  value={newCrypto.team}
+                  value={formCryptoData.team}
                   type="number"
                   id="team"
                   autoComplete="off"
@@ -145,7 +165,7 @@ const CryptoFormCreate = (): JSX.Element => {
                   className="crypto-form-create__value-amount"
                   placeholder="Value"
                   onChange={onChangeData}
-                  value={newCrypto.value}
+                  value={formCryptoData.value}
                   type="number"
                   id="value"
                   autoComplete="off"
@@ -192,5 +212,4 @@ const CryptoFormCreate = (): JSX.Element => {
     </>
   );
 };
-
 export default CryptoFormCreate;
