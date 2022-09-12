@@ -17,9 +17,20 @@ jest.mock("../../store/hooks", () => ({
   useAppSelector: () => mockUseAppSelector(),
 }));
 
+const mockUseCrypto = {
+  getCryptoById: jest.fn().mockResolvedValue({
+    id: "12234",
+    title: "Hola",
+    picture: "japon.jpg",
+    limitDate: expect.any(Date),
+    description: "caminando",
+  }),
+};
+jest.mock("../../hooks/useCrypto/useCrypto", () => () => mockUseCrypto);
+
 describe("Given a CryptoFormModifyPage component", () => {
   describe("When not receives an id", () => {
-    test("Then it should render the created component", () => {
+    test("Then it should render the create component", () => {
       mockUseParams.mockReturnValue({ id: undefined });
       mockUseAppSelector.mockReturnValue([]);
 
