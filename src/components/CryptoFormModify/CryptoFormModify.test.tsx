@@ -139,4 +139,25 @@ describe("Given a CryptoFormModify component", () => {
       expect(mockNavigate).toHaveBeenCalled();
     });
   });
+  describe("When the user change the ICO input", () => {
+    test("Then it should call the onChangeDate function", async () => {
+      const filterDate = "2022-09-16";
+
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CryptoFormModify crypto={crypto} />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const dateInput = screen.getByPlaceholderText(
+        "Enter ICO"
+      ) as HTMLInputElement;
+
+      await userEvent.type(dateInput, filterDate);
+
+      expect(dateInput.value).toBe(filterDate);
+    });
+  });
 });
