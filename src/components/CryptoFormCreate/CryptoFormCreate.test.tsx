@@ -149,4 +149,22 @@ describe("Given a CryptoForm component", () => {
       expect(mockCreateCrypto).toHaveBeenCalled();
     });
   });
+  describe("When click on the button link", () => {
+    test("Then the navigate function will be called", async () => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CryptoFormCreate />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const buttonFake = screen.getByText("Back to the project list");
+
+      await userEvent.click(buttonFake);
+
+      expect(buttonFake).toBeInTheDocument();
+      await expect(mockNavigate).toHaveBeenCalled();
+    });
+  });
 });

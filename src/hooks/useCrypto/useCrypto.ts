@@ -117,7 +117,7 @@ const useCrypto = () => {
         loadingModal("Please wait");
 
         const {
-          data: { modifiedCrypto },
+          data: { upDatedCrypto },
         } = await axios.put(`${modifyURL}${id}`, crypto, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -125,7 +125,7 @@ const useCrypto = () => {
           },
         });
 
-        dispatch(modifyCryptoActionCreator(modifiedCrypto));
+        dispatch(modifyCryptoActionCreator(upDatedCrypto));
         successModal("Crypto modified successfully!");
       } catch (error) {
         errorModal("Cannot modify the crypto");
