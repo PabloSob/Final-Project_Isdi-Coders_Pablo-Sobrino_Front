@@ -61,9 +61,9 @@ const CryptoList = (): JSX.Element => {
             Logout
           </ButtonStyled>
         </section>
-        <div className="crypto-filter">
+        <div className="crypto-filter__date">
           <div className="crypto-filter__buttons">
-            <div className="filter">
+            <div className="crypto-filter__main">
               <label className="Filter-by" htmlFor="date">
                 Filter by date:
               </label>
@@ -77,13 +77,13 @@ const CryptoList = (): JSX.Element => {
                 value={filterByICO}
                 onChange={onChangeData}
               />
-              <FontAwesomeIcon
-                icon={faBitcoinSign}
-                className="icon-bit"
-                data-testid="icon-close"
-                onClick={clearFilter}
-              />
             </div>
+            <FontAwesomeIcon
+              icon={faBitcoinSign}
+              className="icon-bit"
+              data-testid="icon-close"
+              onClick={clearFilter}
+            />
             <Button
               buttonText="Create"
               type="button"

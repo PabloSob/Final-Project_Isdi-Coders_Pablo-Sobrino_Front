@@ -181,6 +181,7 @@ const CryptoFormCreateStyled = styled.div`
     margin-bottom: 1rem;
   }
   .crypto-form-create__project-name {
+    padding-left: 20px;
     height: 3rem;
     border-radius: 8px;
     font-size: 1.5rem;
