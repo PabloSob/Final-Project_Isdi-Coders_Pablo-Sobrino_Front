@@ -102,7 +102,7 @@ const CryptoFormCreate = (): JSX.Element => {
             <section className="crypto-form-create__name-logo">
               <input
                 className="crypto-form-create__project-name"
-                placeholder="  Enter title"
+                placeholder="Enter title"
                 onChange={onChangeData}
                 value={formCryptoData.title}
                 type="text"

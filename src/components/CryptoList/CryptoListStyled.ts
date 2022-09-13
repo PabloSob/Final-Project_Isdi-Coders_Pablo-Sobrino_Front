@@ -60,8 +60,9 @@ const CryptoListStyled = styled.div`
   }
 
   .icon-bit {
-    margin-left: 15px;
-    font-size: 20px;
+    margin-top: 38px;
+    margin-right: 90px;
+    font-size: 25px;
   }
 
   .crypto-list {
