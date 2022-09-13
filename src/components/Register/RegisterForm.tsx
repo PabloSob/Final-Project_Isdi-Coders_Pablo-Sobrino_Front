@@ -30,7 +30,6 @@ const RegisterForm = (): JSX.Element => {
     event.preventDefault();
 
     if (formData.password !== formData.repeatPassword) {
-      return;
     }
 
     setFormData({
