@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useCrypto from "../../hooks/useCrypto/useCrypto";
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
@@ -8,7 +8,8 @@ import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { ButtonStyled } from "../Button/ButtonStyled";
 import useUser from "../../hooks/useUser/useUser";
-import { ToastContainer } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBitcoinSign } from "@fortawesome/free-solid-svg-icons";
 
 const CryptoList = (): JSX.Element => {
   const { getAllCrypto } = useCrypto();
@@ -16,6 +17,16 @@ const CryptoList = (): JSX.Element => {
   const cryptoList = useAppSelector((state: RootState) => state.crypto);
   const navigate = useNavigate();
   const isDisabled = false;
+
+  const [filterByICO, setFilterByICO] = useState("");
+
+  const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterByICO(event.target.value);
+  };
+
+  const clearFilter = () => {
+    setFilterByICO("");
+  };
 
   useEffect(() => {
     getAllCrypto();
@@ -32,7 +43,6 @@ const CryptoList = (): JSX.Element => {
 
   return (
     <>
-      <ToastContainer />
       <CryptoListStyled>
         <section className="logo__container">
           <h1>
@@ -52,15 +62,28 @@ const CryptoList = (): JSX.Element => {
           </ButtonStyled>
         </section>
         <div className="crypto-filter">
-          <span className="text">Filter by:</span>
           <div className="crypto-filter__buttons">
-            <Button
-              buttonText="Value"
-              type="button"
-              classNameTypeButton="button--small"
-              actionOnclick={() => {}}
-              isDisable={isDisabled}
-            />
+            <div className="filter">
+              <label className="Filter-by" htmlFor="date">
+                Filter by date:
+              </label>
+              <input
+                type="date"
+                id="date"
+                className="input-ICO"
+                autoComplete="off"
+                placeholder="Check ICO until"
+                required
+                value={filterByICO}
+                onChange={onChangeData}
+              />
+              <FontAwesomeIcon
+                icon={faBitcoinSign}
+                className="icon-bit"
+                data-testid="icon-close"
+                onClick={clearFilter}
+              />
+            </div>
             <Button
               buttonText="Create"
               type="button"
@@ -70,12 +93,19 @@ const CryptoList = (): JSX.Element => {
             />
           </div>
         </div>
-        <ul className="crypto-list">
-          {cryptoList.map((crypto) => (
-            <li key={crypto.id}>
-              <CryptoCard crypto={crypto} />
-            </li>
-          ))}
+        <ul className="crypto-list" id="crypto-search">
+          {cryptoList
+            .filter((crypto) => {
+              if (!filterByICO) {
+                return true;
+              }
+              return new Date(crypto.ICO) <= new Date(filterByICO);
+            })
+            .map((crypto) => (
+              <li key={crypto.id} className="list__item">
+                <CryptoCard crypto={crypto} />
+              </li>
+            ))}
         </ul>
       </CryptoListStyled>
     </>

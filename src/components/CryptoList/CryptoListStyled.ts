@@ -46,6 +46,23 @@ const CryptoListStyled = styled.div`
       font-weight: bold;
     }
   }
+  .Filter-by {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  .input-ICO {
+    height: 2rem;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 20px;
+    border: 2px solid #159a9c;
+    margin-top: 11px;
+  }
+
+  .icon-bit {
+    margin-left: 15px;
+    font-size: 20px;
+  }
 
   .crypto-list {
     &__heading {
