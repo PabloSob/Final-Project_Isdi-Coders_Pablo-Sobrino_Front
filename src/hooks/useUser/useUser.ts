@@ -52,14 +52,13 @@ const useUser = () => {
         userData
       );
 
-      if (token) {
-        const userInfo: User = decodeToken(token);
+      const userInfo: User = decodeToken(token);
 
-        dispatch(loginUsersActionCreator(userInfo));
-        localStorage.setItem("token", token);
-        navigate("/crypto");
-        return true;
-      }
+      dispatch(loginUsersActionCreator(userInfo));
+      localStorage.setItem("token", token);
+
+      navigate("/crypto");
+      return true;
     } catch (error: any) {
       errorModal("Something went wrong...");
       return error.message;

@@ -29,9 +29,6 @@ const RegisterForm = (): JSX.Element => {
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    if (formData.password !== formData.repeatPassword) {
-    }
-
     setFormData({
       userName: formData.userName,
       password: initialState.password,

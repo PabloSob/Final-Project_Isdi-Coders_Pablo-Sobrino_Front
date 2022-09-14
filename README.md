@@ -52,5 +52,5 @@ Create a crypto. The payload should have a title, an image, a description, the n
 🔹 DEL ➡️ .../crypto/:idToDelete
 Delete a crypto with it's ID.
 
-🔹 PUT ➡️ .../crypto/modify/:noteId
+🔹 PUT ➡️ .../crypto/modify/:id
 Edit a crypto with it's ID.
