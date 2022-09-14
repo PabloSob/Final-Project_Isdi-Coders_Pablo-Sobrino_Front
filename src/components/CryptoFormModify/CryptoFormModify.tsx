@@ -68,6 +68,7 @@ const CryptoFormModify = ({ crypto }: CryptoFormModifyProps): JSX.Element => {
               className="logo__picture"
               src="/img/bitcoin-logo.png"
               alt="a crypto logo"
+              height={"45px"}
               width={"45px"}
             ></img>
           </h1>

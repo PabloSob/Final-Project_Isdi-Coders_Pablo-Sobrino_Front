@@ -58,24 +58,6 @@ describe("Given a useCrypto hook", () => {
       });
     });
 
-    test("Then it should send a loading modal", async () => {
-      const {
-        result: {
-          current: { getAllCrypto },
-        },
-      } = renderHook(useCrypto, { wrapper: Wrapper });
-
-      await act(async () => {
-        await getAllCrypto();
-      });
-
-      await waitFor(() => {
-        expect(toast.loading).toHaveBeenCalledWith("Please wait", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      });
-    });
-
     describe("When invoke getAllCrypto function and it not receives a mockCryptoList", () => {
       test("Then it should send an error message modal", async () => {
         axios.defaults.headers.get["IsTestError"] = true;
@@ -284,24 +266,6 @@ describe("Given a useCrypto hook", () => {
               position: toast.POSITION.TOP_CENTER,
             }
           );
-        });
-      });
-
-      test("Then it should send a loading modal", async () => {
-        const {
-          result: {
-            current: { getAllCrypto },
-          },
-        } = renderHook(useCrypto, { wrapper: Wrapper });
-
-        await act(async () => {
-          await getAllCrypto();
-        });
-
-        await waitFor(() => {
-          expect(toast.loading).toHaveBeenCalledWith("Please wait", {
-            position: toast.POSITION.TOP_CENTER,
-          });
         });
       });
 
