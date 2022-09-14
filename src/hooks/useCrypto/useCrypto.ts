@@ -11,11 +11,6 @@ import { useAppDispatch } from "../../store/hooks";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
-export const loadingModal = (loading: string) =>
-  toast.loading(loading, {
-    position: toast.POSITION.TOP_CENTER,
-  });
-
 export const successModal = (message: string) =>
   toast.success(message, {
     position: toast.POSITION.TOP_CENTER,
@@ -34,7 +29,6 @@ const useCrypto = () => {
     const loadCryptoUrl = `${apiURL}crypto`;
 
     try {
-      loadingModal("Please wait");
       const {
         data: { crypto },
       } = await axios.get(loadCryptoUrl, {
@@ -55,7 +49,6 @@ const useCrypto = () => {
       const deleteCryptoUrl = `${apiURL}crypto/`;
 
       try {
-        loadingModal("Please wait");
         await axios.delete(`${deleteCryptoUrl}${cryptoId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -114,8 +107,6 @@ const useCrypto = () => {
       const modifyURL = `${apiURL}crypto/`;
 
       try {
-        loadingModal("Please wait");
-
         const {
           data: { upDatedCrypto },
         } = await axios.put(`${modifyURL}${id}`, crypto, {

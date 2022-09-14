@@ -69,7 +69,6 @@ const useUser = () => {
     dispatch<PayloadAction>(logoutActionCreator());
     localStorage.removeItem("token");
   };
-  toast.dismiss();
   return { register, login, logout };
 };
 export default useUser;
